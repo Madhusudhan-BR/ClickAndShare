@@ -25,14 +25,29 @@ class ViewController: UIViewController {
         tf.placeholder = "Email"
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.borderStyle = .roundedRect
+        tf.addTarget(self, action: #selector(handleInputEdidting), for: .editingChanged)
         return tf
     }()
+    
+    func handleInputEdidting() {
+        let isFormValid = (emailTextField.text?.characters.count)!>0 && (usernameTextField.text?.characters.count)!>0 && (passwordTextField.text?.characters.count)! > 0
+        
+        if isFormValid{
+            signupButton.isEnabled = true
+            signupButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        }else {
+            signupButton.isEnabled = false
+            signupButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+
+        }
+    }
     
     let usernameTextField : UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Username"
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        tf.addTarget(self, action: #selector(handleInputEdidting), for: .editingChanged)
         tf.borderStyle = .roundedRect
         return tf
     }()
@@ -42,6 +57,7 @@ class ViewController: UIViewController {
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Password"
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
+        tf.addTarget(self, action: #selector(handleInputEdidting), for: .editingChanged)
         tf.borderStyle = .roundedRect
         tf.isSecureTextEntry = true
         return tf
@@ -55,6 +71,7 @@ class ViewController: UIViewController {
         button.layer.masksToBounds = true
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleSignupButton), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
