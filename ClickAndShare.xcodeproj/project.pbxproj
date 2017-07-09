@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29B0C56862103499920D8D7A /* Pods_ClickAndShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF51CECF159202217624EE8 /* Pods_ClickAndShareTests.framework */; };
 		9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962201F1241A30078F9B2 /* AppDelegate.swift */; };
 		9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962221F1241A30078F9B2 /* ViewController.swift */; };
 		9B6962261F1241A30078F9B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962241F1241A30078F9B2 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 		9B6962391F1241A40078F9B2 /* ClickAndShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962381F1241A40078F9B2 /* ClickAndShareTests.swift */; };
 		9B6962441F1241A40078F9B2 /* ClickAndShareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */; };
 		9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962521F124F2C0078F9B2 /* Extensions.swift */; };
+		9B6962551F1257440078F9B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962541F1257440078F9B2 /* GoogleService-Info.plist */; };
+		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
+		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03247E09949DB753C10AFE0A /* Pods-ClickAndShareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareTests/Pods-ClickAndShareTests.release.xcconfig"; sourceTree = "<group>"; };
+		1104FEDFE2B8B76FB349B1B4 /* Pods-ClickAndShareTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareTests/Pods-ClickAndShareTests.debug.xcconfig"; sourceTree = "<group>"; };
+		49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClickAndShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B0589AAC7861C61BEC5309B /* Pods-ClickAndShareUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B69621D1F1241A30078F9B2 /* ClickAndShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickAndShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6962201F1241A30078F9B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B6962221F1241A30078F9B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +59,12 @@
 		9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickAndShareUITests.swift; sourceTree = "<group>"; };
 		9B6962451F1241A40078F9B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B6962521F124F2C0078F9B2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9B6962541F1257440078F9B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
+		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
+		D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClickAndShareUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBF51CECF159202217624EE8 /* Pods_ClickAndShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClickAndShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B0C56862103499920D8D7A /* Pods_ClickAndShareTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +88,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		453CC8F00EE2E1B49364A1FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */,
+				C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */,
+				1104FEDFE2B8B76FB349B1B4 /* Pods-ClickAndShareTests.debug.xcconfig */,
+				03247E09949DB753C10AFE0A /* Pods-ClickAndShareTests.release.xcconfig */,
+				9B0589AAC7861C61BEC5309B /* Pods-ClickAndShareUITests.debug.xcconfig */,
+				B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9B6962141F1241A30078F9B2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +115,8 @@
 				9B6962371F1241A40078F9B2 /* ClickAndShareTests */,
 				9B6962421F1241A40078F9B2 /* ClickAndShareUITests */,
 				9B69621E1F1241A30078F9B2 /* Products */,
+				453CC8F00EE2E1B49364A1FA /* Pods */,
+				B51D046E8D52F76EDC1F3C62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +140,7 @@
 				9B69622A1F1241A30078F9B2 /* Assets.xcassets */,
 				9B69622C1F1241A30078F9B2 /* LaunchScreen.storyboard */,
 				9B69622F1F1241A30078F9B2 /* Info.plist */,
+				9B6962541F1257440078F9B2 /* GoogleService-Info.plist */,
 				9B6962271F1241A30078F9B2 /* ClickAndShare.xcdatamodeld */,
 			);
 			path = ClickAndShare;
@@ -139,6 +172,16 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B51D046E8D52F76EDC1F3C62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */,
+				EBF51CECF159202217624EE8 /* Pods_ClickAndShareTests.framework */,
+				D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,9 +189,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B6962481F1241A40078F9B2 /* Build configuration list for PBXNativeTarget "ClickAndShare" */;
 			buildPhases = (
+				887BDA273DF5F8C6E6F33EC3 /* [CP] Check Pods Manifest.lock */,
 				9B6962191F1241A30078F9B2 /* Sources */,
 				9B69621A1F1241A30078F9B2 /* Frameworks */,
 				9B69621B1F1241A30078F9B2 /* Resources */,
+				48215B609CE74CC06C7A4EDA /* [CP] Embed Pods Frameworks */,
+				BE4918C80F36FDFF04600507 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -163,9 +209,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B69624B1F1241A40078F9B2 /* Build configuration list for PBXNativeTarget "ClickAndShareTests" */;
 			buildPhases = (
+				9B21AB9B957E13B112025942 /* [CP] Check Pods Manifest.lock */,
 				9B6962301F1241A40078F9B2 /* Sources */,
 				9B6962311F1241A40078F9B2 /* Frameworks */,
 				9B6962321F1241A40078F9B2 /* Resources */,
+				04AC401555DDC787000220D9 /* [CP] Embed Pods Frameworks */,
+				264CCD2A8C94EBF745EFCEDA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -181,9 +230,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B69624E1F1241A40078F9B2 /* Build configuration list for PBXNativeTarget "ClickAndShareUITests" */;
 			buildPhases = (
+				1B15FC5797916DF0C565FB91 /* [CP] Check Pods Manifest.lock */,
 				9B69623B1F1241A40078F9B2 /* Sources */,
 				9B69623C1F1241A40078F9B2 /* Frameworks */,
 				9B69623D1F1241A40078F9B2 /* Resources */,
+				776EFE598F384204C7844D25 /* [CP] Embed Pods Frameworks */,
+				1AD90AAB08F8564C08312D36 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B69622E1F1241A30078F9B2 /* LaunchScreen.storyboard in Resources */,
+				9B6962551F1257440078F9B2 /* GoogleService-Info.plist in Resources */,
 				9B69622B1F1241A30078F9B2 /* Assets.xcassets in Resources */,
 				9B6962261F1241A30078F9B2 /* Main.storyboard in Resources */,
 			);
@@ -270,6 +323,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04AC401555DDC787000220D9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShareTests/Pods-ClickAndShareTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1AD90AAB08F8564C08312D36 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B15FC5797916DF0C565FB91 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		264CCD2A8C94EBF745EFCEDA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShareTests/Pods-ClickAndShareTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48215B609CE74CC06C7A4EDA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		776EFE598F384204C7844D25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		887BDA273DF5F8C6E6F33EC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9B21AB9B957E13B112025942 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BE4918C80F36FDFF04600507 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9B6962191F1241A30078F9B2 /* Sources */ = {
@@ -431,6 +622,7 @@
 		};
 		9B6962491F1241A40078F9B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;
@@ -445,6 +637,7 @@
 		};
 		9B69624A1F1241A40078F9B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;
@@ -459,6 +652,7 @@
 		};
 		9B69624C1F1241A40078F9B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1104FEDFE2B8B76FB349B1B4 /* Pods-ClickAndShareTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -474,6 +668,7 @@
 		};
 		9B69624D1F1241A40078F9B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03247E09949DB753C10AFE0A /* Pods-ClickAndShareTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -489,6 +684,7 @@
 		};
 		9B69624F1F1241A40078F9B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B0589AAC7861C61BEC5309B /* Pods-ClickAndShareUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;
@@ -503,6 +699,7 @@
 		};
 		9B6962501F1241A40078F9B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;

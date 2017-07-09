@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -53,8 +54,25 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleSignupButton), for: .touchUpInside)
         return button
     }()
+    
+    func handleSignupButton(){
+        
+        guard  let email = emailTextField.text, email.characters.count > 0  , let username = usernameTextField.text ,username.characters.count > 0 ,  let password = passwordTextField.text , password.characters.count > 0 else {
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                print(error.debugDescription)
+                return
+            }
+            print("MADHU : Successfully created user \(username)")
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +116,7 @@ extension UIView {
 
     func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat) {
         
-        translatesAutoresizingMaskIntoConstraints = false 
+        translatesAutoresizingMaskIntoConstraints = false
         
         if let top = top {
             self.topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
@@ -118,11 +136,11 @@ extension UIView {
         }
         
         if width != 0 {
-            self.widthAnchor.constraint(equalToConstant: width)
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
         }
         
         if height != 0 {
-            self.heightAnchor.constraint(equalToConstant: height)
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
         }
         
     }
