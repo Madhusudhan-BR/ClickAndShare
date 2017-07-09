@@ -15,6 +15,7 @@
 		9B69622E1F1241A30078F9B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B69622C1F1241A30078F9B2 /* LaunchScreen.storyboard */; };
 		9B6962391F1241A40078F9B2 /* ClickAndShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962381F1241A40078F9B2 /* ClickAndShareTests.swift */; };
 		9B6962441F1241A40078F9B2 /* ClickAndShareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */; };
+		9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962521F124F2C0078F9B2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		9B69623F1F1241A40078F9B2 /* ClickAndShareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClickAndShareUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickAndShareUITests.swift; sourceTree = "<group>"; };
 		9B6962451F1241A40078F9B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B6962521F124F2C0078F9B2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		9B69621F1F1241A30078F9B2 /* ClickAndShare */ = {
 			isa = PBXGroup;
 			children = (
+				9B6962511F124EB80078F9B2 /* Extensions */,
 				9B6962201F1241A30078F9B2 /* AppDelegate.swift */,
 				9B6962221F1241A30078F9B2 /* ViewController.swift */,
 				9B6962241F1241A30078F9B2 /* Main.storyboard */,
@@ -126,6 +129,14 @@
 				9B6962451F1241A40078F9B2 /* Info.plist */,
 			);
 			path = ClickAndShareUITests;
+			sourceTree = "<group>";
+		};
+		9B6962511F124EB80078F9B2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9B6962521F124F2C0078F9B2 /* Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +279,7 @@
 				9B6962291F1241A30078F9B2 /* ClickAndShare.xcdatamodeld in Sources */,
 				9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */,
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,
+				9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +435,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;
 				INFOPLIST_FILE = ClickAndShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -436,6 +449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LXKYY3Z6TA;
 				INFOPLIST_FILE = ClickAndShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
