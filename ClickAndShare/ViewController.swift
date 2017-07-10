@@ -9,15 +9,39 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     let addPhotoButton: UIButton = {
         let button = UIButton(type : .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleAddphotoButton), for: .touchUpInside)
         return button
     }()
+    
+    func handleAddphotoButton(){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            addPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            addPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width/2
+        addPhotoButton.layer.masksToBounds = true
+        addPhotoButton.layer.borderColor = UIColor.black.cgColor
+        addPhotoButton.layer.borderWidth = 3.0
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     let emailTextField : UITextField = {
         let tf = UITextField()
