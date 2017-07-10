@@ -18,6 +18,8 @@
 		9B6962441F1241A40078F9B2 /* ClickAndShareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */; };
 		9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962521F124F2C0078F9B2 /* Extensions.swift */; };
 		9B6962551F1257440078F9B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962541F1257440078F9B2 /* GoogleService-Info.plist */; };
+		9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */; };
+		9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962581F134FF10078F9B2 /* UserProfileController.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		9B6962451F1241A40078F9B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B6962521F124F2C0078F9B2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9B6962541F1257440078F9B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9B6962581F134FF10078F9B2 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				9B6962511F124EB80078F9B2 /* Extensions */,
 				9B6962201F1241A30078F9B2 /* AppDelegate.swift */,
 				9B6962221F1241A30078F9B2 /* ViewController.swift */,
+				9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */,
+				9B6962581F134FF10078F9B2 /* UserProfileController.swift */,
 				9B6962241F1241A30078F9B2 /* Main.storyboard */,
 				9B69622A1F1241A30078F9B2 /* Assets.xcassets */,
 				9B69622C1F1241A30078F9B2 /* LaunchScreen.storyboard */,
@@ -469,6 +475,8 @@
 			files = (
 				9B6962291F1241A30078F9B2 /* ClickAndShare.xcdatamodeld in Sources */,
 				9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */,
+				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
+				9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */,
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,
 				9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */,
 			);
@@ -731,6 +739,7 @@
 				9B69624A1F1241A40078F9B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B69624B1F1241A40078F9B2 /* Build configuration list for PBXNativeTarget "ClickAndShareTests" */ = {
 			isa = XCConfigurationList;
@@ -739,6 +748,7 @@
 				9B69624D1F1241A40078F9B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B69624E1F1241A40078F9B2 /* Build configuration list for PBXNativeTarget "ClickAndShareUITests" */ = {
 			isa = XCConfigurationList;
@@ -747,6 +757,7 @@
 				9B6962501F1241A40078F9B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
