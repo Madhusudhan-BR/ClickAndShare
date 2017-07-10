@@ -7,11 +7,35 @@
 //
 
 import UIKit
+import Firebase
 
 class UserProfileController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = UIColor.green
+        collectionView?.backgroundColor = .white
+        
+        fetchUser()
     }
+    
+    fileprivate func fetchUser(){
+        guard let UID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        Database.database().reference().child("users").child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            
+            if let dict = snapshot.value as? [String: Any] {
+                if let username = dict["username"] as? String {
+                    self.navigationItem.title = username
+                }
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
+    
 }
