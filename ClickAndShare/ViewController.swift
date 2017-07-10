@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 
 class ViewController: UIViewController {
     
@@ -86,6 +86,22 @@ class ViewController: UIViewController {
                 print(error.debugDescription)
                 return
             }
+            
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            let userValues = ["username" : username, "email" : email]
+            let values = [uid : userValues]
+            
+            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, ref) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                print("Madhu: Saved user to DB")
+            })
+            
             print("MADHU : Successfully created user \(username)")
         }
         
