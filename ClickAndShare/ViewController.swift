@@ -115,16 +115,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 return
             }
             
-            let userValues = ["username" : username, "email" : email]
-            let values = [uid : userValues]
+            guard let image = self.addPhotoButton.imageView?.image else {
+                return
+            }
             
-            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, ref) in
+            guard let uploadData = UIImageJPEGRepresentation(image, 0.2) else {
+                return
+            }
+            
+            let imageName = NSUUID().uuidString
+           
+            
+            Storage.storage().reference().child("profile_images").child(imageName).putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
-                print("Madhu: Saved user to DB")
+                print("Madhu: ProfileImage uploaded to firebase storage")
+                guard let profileImageURL = metadata?.downloadURL()?.absoluteString else {
+                    return
+                }
+                
+                
+                let userValues = ["username" : username, "email" : email, "profileImageURL" : profileImageURL ]
+                let values = [uid : userValues]
+                
+                Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, ref) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    print("Madhu: Saved user to DB")
+                })
+                
             })
+            
+            
+            
+            
             
             print("MADHU : Successfully created user \(username)")
         }
