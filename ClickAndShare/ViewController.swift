@@ -11,6 +11,21 @@ import Firebase
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let toSigninButton : UIButton = {
+        let button = UIButton(type: .system)
+        
+        let attributedString = NSMutableAttributedString(string: "Have an account already? ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
+        attributedString.append(NSAttributedString(string: "Sign In", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.addTarget(self, action: #selector(handleToSignin), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    func handleToSignin() {
+        navigationController?.popViewController(animated: true)
+    }
     
     let addPhotoButton: UIButton = {
         let button = UIButton(type : .system)
@@ -171,7 +186,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
         setupInput()
-        
+        view.addSubview(toSigninButton)
+        toSigninButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
     }
     
     fileprivate func  setupInput() {
