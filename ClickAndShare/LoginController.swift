@@ -73,7 +73,11 @@ class LoginController : UIViewController {
                 print(error)
             }
             print("Madhu: Succeess login ")
-            
+            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {
+                return
+            }
+            mainTabBarController.initialSetup()
+            self.dismiss(animated: true, completion: nil)
         }
         
 }

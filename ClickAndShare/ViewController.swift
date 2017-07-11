@@ -164,12 +164,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 })
                 
             })
-            
-            
-            
-            
-            
             print("MADHU : Successfully created user \(username)")
+            
+            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {
+                return
+            }
+            mainTabBarController.initialSetup()
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
