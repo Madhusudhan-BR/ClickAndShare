@@ -22,6 +22,7 @@
 		9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962581F134FF10078F9B2 /* UserProfileController.swift */; };
 		9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69625E1F1359F30078F9B2 /* UserProfileHeader.swift */; };
 		9B6962611F136C490078F9B2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962601F136C490078F9B2 /* User.swift */; };
+		9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962641F148B0D0078F9B2 /* LoginController.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		9B6962581F134FF10078F9B2 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		9B69625E1F1359F30078F9B2 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		9B6962601F136C490078F9B2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9B6962641F148B0D0078F9B2 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -180,9 +182,9 @@
 		9B69625A1F1359510078F9B2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B6962631F148AF10078F9B2 /* Login */,
 				9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */,
 				9B6962581F134FF10078F9B2 /* UserProfileController.swift */,
-				9B6962221F1241A30078F9B2 /* ViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -222,6 +224,15 @@
 				9B69622C1F1241A30078F9B2 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		9B6962631F148AF10078F9B2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9B6962221F1241A30078F9B2 /* ViewController.swift */,
+				9B6962641F148B0D0078F9B2 /* LoginController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		B51D046E8D52F76EDC1F3C62 /* Frameworks */ = {
@@ -523,6 +534,7 @@
 				9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */,
 				9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */,
 				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
+				9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */,
 				9B6962611F136C490078F9B2 /* User.swift in Sources */,
 				9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */,
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,

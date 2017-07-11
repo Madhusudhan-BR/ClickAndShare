@@ -163,6 +163,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         view.addSubview(addPhotoButton)
+        view.backgroundColor = .white 
         addPhotoButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
         addPhotoButton.heightAnchor.constraint(equalToConstant: 140).isActive = true
         addPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
