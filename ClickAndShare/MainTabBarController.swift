@@ -30,14 +30,27 @@ class MainTabBarController: UITabBarController {
     func initialSetup(){
         
         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        let navigationController = UINavigationController(rootViewController: userProfileController)
+        let userProfileNav = UINavigationController(rootViewController: userProfileController)
+        userProfileNav.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
+        userProfileNav.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
         
-        navigationController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
-        navigationController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
+        let homeNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "home_selected"), unselectedImage: #imageLiteral(resourceName: "home_unselected"))
+        let searchNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "search_selected"), unselectedImage: #imageLiteral(resourceName: "search_unselected"))
+        let addPostNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "plus_unselected"), unselectedImage: #imageLiteral(resourceName: "plus_unselected"))
+        let likeNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "like_selected"), unselectedImage: #imageLiteral(resourceName: "like_unselected"))
+        
         tabBar.tintColor = .black
+        viewControllers = [homeNav, searchNav, addPostNav, likeNav, userProfileNav]
         
         
-        viewControllers = [navigationController]
-
+    }
+    
+    func templateNavBarController(selectedImage:UIImage, unselectedImage: UIImage) -> UINavigationController {
+        let vc = UIViewController()
+        let nav =  UINavigationController(rootViewController: vc)
+        nav.tabBarItem.selectedImage = selectedImage
+        nav.tabBarItem.image = unselectedImage
+        
+        return nav
     }
 }
