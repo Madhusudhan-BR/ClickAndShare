@@ -9,14 +9,29 @@
 import UIKit
 import Firebase
 
-class UserProfileController: UICollectionViewController {
+class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        
         fetchUser()
+        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
     }
+    
+
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! UserProfileHeader
+        header.user = self.user 
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
+    }
+    
     
     fileprivate func fetchUser(){
         guard let UID = Auth.auth().currentUser?.uid else {
@@ -27,10 +42,10 @@ class UserProfileController: UICollectionViewController {
             
             
             if let dict = snapshot.value as? [String: Any] {
-                if let username = dict["username"] as? String {
-                    self.navigationItem.title = username
-                }
+                 self.user = User(dictionary: dict)
+                self.navigationItem.title = self.user?.username
             }
+            self.collectionView?.reloadData()
             
         }) { (error) in
             print(error.localizedDescription)

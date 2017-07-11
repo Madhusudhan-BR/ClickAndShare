@@ -217,7 +217,7 @@ extension UIView {
         }
         
         if let right = right {
-            self.rightAnchor.constraint(equalTo: right, constant: paddingRight).isActive = true
+            self.rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
         }
         
         if width != 0 {
