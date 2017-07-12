@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,23 @@ class MainTabBarController: UITabBarController {
             }
         }
         
+        self.delegate = self
+        
         initialSetup()
+    }
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        if  let index = viewControllers?.index(of: viewController) {
+            if index == 2 {
+                let photoSelectorVC = PhotoSelectorController(collectionViewLayout: UICollectionViewFlowLayout())
+                let navController = UINavigationController(rootViewController: photoSelectorVC)
+                present(navController, animated: true, completion: nil)
+                return false
+            }
+        }
+        return true 
     }
     
     func initialSetup(){
@@ -42,6 +58,15 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = .black
         viewControllers = [homeNav, searchNav, addPostNav, likeNav, userProfileNav]
         
+        // modify tab bar icon insests 
+        
+        guard let items = tabBar.items else {
+            return
+        }
+        
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
+        }
         
     }
     
