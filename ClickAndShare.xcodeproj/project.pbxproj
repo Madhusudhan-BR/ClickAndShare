@@ -25,6 +25,7 @@
 		9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962641F148B0D0078F9B2 /* LoginController.swift */; };
 		9B6962671F15CD960078F9B2 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962661F15CD960078F9B2 /* PhotoSelectorController.swift */; };
 		9B6962691F15E6530078F9B2 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962681F15E6530078F9B2 /* PhotoSelectorCell.swift */; };
+		9B69626C1F15FCF20078F9B2 /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69626B1F15FCF20078F9B2 /* PhotoSelectorHeader.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		9B6962641F148B0D0078F9B2 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9B6962661F15CD960078F9B2 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		9B6962681F15E6530078F9B2 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
+		9B69626B1F15FCF20078F9B2 /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				9B69625E1F1359F30078F9B2 /* UserProfileHeader.swift */,
 				9B6962681F15E6530078F9B2 /* PhotoSelectorCell.swift */,
+				9B69626B1F15FCF20078F9B2 /* PhotoSelectorHeader.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B69626C1F15FCF20078F9B2 /* PhotoSelectorHeader.swift in Sources */,
 				9B6962691F15E6530078F9B2 /* PhotoSelectorCell.swift in Sources */,
 				9B6962291F1241A30078F9B2 /* ClickAndShare.xcdatamodeld in Sources */,
 				9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */,

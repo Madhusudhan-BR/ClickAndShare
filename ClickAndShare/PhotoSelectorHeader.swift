@@ -1,5 +1,5 @@
 //
-//  PhotoSelectorCell.swift
+//  PhotoSelectorHeader.swift
 //  ClickAndShare
 //
 //  Created by Madhusudhan B.R on 7/12/17.
@@ -8,20 +8,22 @@
 
 import UIKit
 
-class PhotoSelectorCell : UICollectionViewCell {
+class PhotoSelectorHeader : UICollectionViewCell {
     
-    let imageView : UIImageView = {
+    
+    let selectedImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
     
+    
     override init(frame: CGRect) {
-        super.init(frame: frame )
+        super.init(frame: frame)
         
-        addSubview(imageView)
-        imageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        addSubview(selectedImageView)
+        selectedImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {

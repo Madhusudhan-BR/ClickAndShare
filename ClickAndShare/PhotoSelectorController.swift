@@ -14,19 +14,21 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     let cellID = "cell"
     let headerID = "header"
     var images = [UIImage]()
+    var selectedImage : UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         collectionView?.backgroundColor = .white
         collectionView?.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
-        setupNavBar()
+        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
+        
         fetchPhotos()
     }
     
     func fetchPhotos(){
         let options =  PHFetchOptions()
-        options.fetchLimit = 5
+        options.fetchLimit = 3
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         options.sortDescriptors = [sortDescriptor]
         let allPhotos = PHAsset.fetchAssets(with: .image, options:options )
@@ -51,6 +53,11 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
         })
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.selectedImage = images[indexPath.row]
+         self.collectionView?.reloadData()
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.width)
@@ -84,14 +91,15 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! PhotoSelectorHeader
+        cell.selectedImageView.image = selectedImage
+       
         return cell
     }
     
     fileprivate func setupNavBar(){
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(handleNext))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(handleNext))
         self.navigationController?.navigationBar.tintColor = .black
     }
     
