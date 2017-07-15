@@ -128,12 +128,14 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
         return cell
     }
     
+    var header : PhotoSelectorHeader?
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! PhotoSelectorHeader
         if let selectedImage = self.selectedImage {
         let index = images.index(of: selectedImage)
             let asset = assets[index!]
-            
+            self.header = cell 
             let imageManager = PHImageManager.default()
             imageManager.requestImage(for: asset, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: nil, resultHandler: { (image, info) in
                 
@@ -165,6 +167,7 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     func handleNext() {
        
         let shareController = ShareController()
+        shareController.selectedImage = header?.selectedImageView.image 
         navigationController?.pushViewController(shareController, animated: true) 
         
         
