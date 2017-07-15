@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShareController : UIViewController {
     
@@ -59,7 +60,25 @@ class ShareController : UIViewController {
     }
     
     func handleShare() {
-        print("handling share")
+        guard let imageToUpload = selectedImage else { return }
+        
+        let imageUUID = NSUUID().uuidString
+        
+        guard let imageData = UIImageJPEGRepresentation(imageToUpload, 0.5) else { return }
+        
+        Storage.storage().reference().child("Posts").child(imageUUID).putData(imageData, metadata: nil) { (metadata, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let imageURL = metadata?.downloadURL()?.absoluteString else { return }
+            
+            print("The storage link is ", imageURL)
+            
+        }
+        
     }
     
 }
