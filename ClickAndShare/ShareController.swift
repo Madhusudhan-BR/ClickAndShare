@@ -60,6 +60,9 @@ class ShareController : UIViewController {
     }
     
     func handleShare() {
+        
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
         guard let imageToUpload = selectedImage else { return }
         
         let imageUUID = NSUUID().uuidString
@@ -69,6 +72,7 @@ class ShareController : UIViewController {
         Storage.storage().reference().child("Posts").child(imageUUID).putData(imageData, metadata: nil) { (metadata, error) in
             
             if let error = error {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
                 print(error.localizedDescription)
                 return
             }
@@ -76,6 +80,36 @@ class ShareController : UIViewController {
             guard let imageURL = metadata?.downloadURL()?.absoluteString else { return }
             
             print("The storage link is ", imageURL)
+            
+            self.uploadToDatabase(imageUrl : imageURL)
+        }
+        
+    }
+    
+    func uploadToDatabase(imageUrl: String){
+        
+        guard  let caption = captionTextView.text, caption != "" else {
+            return
+        }
+        
+        guard let image = selectedImage else {
+            return
+        }
+        
+       guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let values = ["imageUrl": imageUrl, "caption": caption, "imageWidth": image.size.width, "imageHeight": image.size.height, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        
+        Database.database().reference().child("posts").child(uid).childByAutoId().updateChildValues(values) { (error, reference) in
+            if let error = error {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print(error.localizedDescription)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            
+            print("Post data has been uploaded to firebase")
             
         }
         
