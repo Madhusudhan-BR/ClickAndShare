@@ -164,6 +164,10 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     
     func handleNext() {
        
+        let shareController = ShareController()
+        navigationController?.pushViewController(shareController, animated: true) 
+        
+        
     }
     
 //    func filterButtonTapped(sender: UIButton) {
