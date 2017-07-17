@@ -14,6 +14,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         if Auth.auth().currentUser?.uid == nil {
             
             
@@ -28,6 +29,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         initialSetup()
     }
+    
     
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

@@ -12,6 +12,8 @@ import Firebase
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var user: User?
+    var currentUserID: String?
+    var currentUserPosts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,43 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
         setupLogoutController()
+        
+        observeMyPosts()
+    }
+    
+    fileprivate func observeMyPosts(){
+        
+        let postsRef = Database.database().reference().child("posts").child(currentUserID!)
+        postsRef.observe(.childAdded, with: { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            
+            guard let caption = dict["caption"] as? String else {
+                return
+            }
+            guard let creationDate = dict["creationDate"] as? NSNumber else {
+                return
+            }
+            guard let imageHeight = dict["imageHeight"] as? CGFloat else {
+                return
+            }
+            guard let imageWidth = dict["imageWidth"] as? CGFloat else {
+                return
+            }
+            guard let imageUrl = dict["caption"] as? String else {
+                return
+            }
+            
+            let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+            print(post)
+            self.currentUserPosts.append(post)
+            
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+            
+        }) { (error) in
+            print(error)
+        }
     }
     
     fileprivate func setupLogoutController() {
@@ -63,7 +102,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return currentUserPosts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,6 +128,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         guard let UID = Auth.auth().currentUser?.uid else {
             return
         }
+        self.currentUserID = UID
         
         Database.database().reference().child("users").child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
             
