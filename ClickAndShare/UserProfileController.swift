@@ -20,7 +20,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.backgroundColor = .white
         fetchUser()
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: "cell")
         
         setupLogoutController()
         
@@ -50,7 +50,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
                 guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
                     return
                 }
-                guard let imageUrl = eachDict["caption"] as? String else {
+                guard let imageUrl = eachDict["imageUrl"] as? String else {
                     return
                 }
                 
@@ -116,8 +116,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .purple
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCell
+        let post = self.currentUserPosts[indexPath.item]
+        cell.imageView.loadImage(urlString: post.imageUrl ?? "")
         return cell
     }
     

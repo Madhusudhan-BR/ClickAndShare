@@ -12,7 +12,11 @@ class UserProfileHeader: UICollectionViewCell {
     
     var user : User? {
         didSet {
-            setupProfileImage()
+            //setupProfileImage()
+            guard  let url = user?.profileImageURL  else {
+                return
+            }
+            self.profileImageView.loadImage(urlString: url)
             usernameLabel.text = user?.username
         }
     }
@@ -64,8 +68,8 @@ class UserProfileHeader: UICollectionViewCell {
     }()
     
     
-    let profileImageView : UIImageView = {
-        let iv = UIImageView()
+    let profileImageView : CustomImageView = {
+        let iv = CustomImageView()
         
         iv.layer.cornerRadius = 40
         iv.layer.masksToBounds = true 

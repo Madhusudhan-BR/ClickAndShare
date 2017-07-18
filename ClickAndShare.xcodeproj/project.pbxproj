@@ -29,6 +29,7 @@
 		9B69626E1F1A3E4D0078F9B2 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */; };
 		9B6962701F1A75900078F9B2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69626F1F1A75900078F9B2 /* Post.swift */; };
 		9B6962721F1DB6B80078F9B2 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962711F1DB6B80078F9B2 /* UserProfileCell.swift */; };
+		9B6962741F1DEE090078F9B2 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962731F1DEE090078F9B2 /* CustomImageView.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		9B69626F1F1A75900078F9B2 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9B6962711F1DB6B80078F9B2 /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
+		9B6962731F1DEE090078F9B2 /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				9B6962681F15E6530078F9B2 /* PhotoSelectorCell.swift */,
 				9B69626B1F15FCF20078F9B2 /* PhotoSelectorHeader.swift */,
 				9B6962711F1DB6B80078F9B2 /* UserProfileCell.swift */,
+				9B6962731F1DEE090078F9B2 /* CustomImageView.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				9B6962701F1A75900078F9B2 /* Post.swift in Sources */,
 				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
 				9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */,
+				9B6962741F1DEE090078F9B2 /* CustomImageView.swift in Sources */,
 				9B6962611F136C490078F9B2 /* User.swift in Sources */,
 				9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */,
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,
