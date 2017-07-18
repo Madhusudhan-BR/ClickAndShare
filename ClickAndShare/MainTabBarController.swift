@@ -52,7 +52,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         userProfileNav.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
         userProfileNav.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
         
-        let homeNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "home_selected"), unselectedImage: #imageLiteral(resourceName: "home_unselected"))
+        let homeNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "home_selected"), unselectedImage: #imageLiteral(resourceName: "home_unselected"),rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
         let searchNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "search_selected"), unselectedImage: #imageLiteral(resourceName: "search_unselected"))
         let addPostNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "plus_unselected"), unselectedImage: #imageLiteral(resourceName: "plus_unselected"))
         let likeNav = templateNavBarController(selectedImage: #imageLiteral(resourceName: "like_selected"), unselectedImage: #imageLiteral(resourceName: "like_unselected"))
@@ -72,8 +72,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
     }
     
-    func templateNavBarController(selectedImage:UIImage, unselectedImage: UIImage) -> UINavigationController {
-        let vc = UIViewController()
+    func templateNavBarController(selectedImage:UIImage, unselectedImage: UIImage, rootViewController: UIViewController = UIViewController()) -> UINavigationController {
+        let vc = rootViewController
         let nav =  UINavigationController(rootViewController: vc)
         nav.tabBarItem.selectedImage = selectedImage
         nav.tabBarItem.image = unselectedImage
