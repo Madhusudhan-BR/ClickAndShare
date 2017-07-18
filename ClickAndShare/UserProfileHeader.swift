@@ -160,31 +160,6 @@ class UserProfileHeader: UICollectionViewCell {
 
     }
     
-    
-    fileprivate func setupProfileImage(){
-        
-        guard let profileImageURL = user?.profileImageURL else {
-            return
-        }
-        
-        guard let url = URL(string: profileImageURL) else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            let image = UIImage(data: data!)
-            
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-            
-            
-        }.resume()
-        
-    }
+  
     
 }

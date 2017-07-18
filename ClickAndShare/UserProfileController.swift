@@ -31,45 +31,31 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         let postsRef = Database.database().reference().child("posts").child(currentUserID!)
         
-        postsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let dict = snapshot.value as? [String: Any] else { return }
-            
-            for dictionary in dict {
-               // print(dictionary)
-                
-                guard let eachDict = dictionary.value as? [String: Any] else { return }
-                guard let caption = eachDict["caption"] as? String else {
-                    return
-                }
-                guard let creationDate = eachDict["creationDate"] as? NSNumber else {
-                    return
-                }
-                guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
-                    return
-                }
-                guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
-                    return
-                }
-                guard let imageUrl = eachDict["imageUrl"] as? String else {
-                    return
-                }
-                
-                let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
-                print(post)
-                self.currentUserPosts.append(post)
+        postsRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
+            guard let eachDict = snapshot.value as? [String: Any] else { return }
+            guard let caption = eachDict["caption"] as? String else {
+                return
+            }
+            guard let creationDate = eachDict["creationDate"] as? NSNumber else {
+                return
+            }
+            guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
+                return
+            }
+            guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
+                return
+            }
+            guard let imageUrl = eachDict["imageUrl"] as? String else {
+                return
             }
             
-
-            
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-            }
-
+            let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+            print(post)
+            self.currentUserPosts.append(post)
+            self.collectionView?.reloadData()
         }) { (error) in
-            print(error.localizedDescription)
-            return
+            print(error)
         }
-        
     }
     
     fileprivate func setupLogoutController() {
