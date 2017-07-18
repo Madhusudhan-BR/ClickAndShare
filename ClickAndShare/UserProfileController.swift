@@ -30,36 +30,46 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     fileprivate func observeMyPosts(){
         
         let postsRef = Database.database().reference().child("posts").child(currentUserID!)
-        postsRef.observe(.childAdded, with: { (snapshot) in
+        
+        postsRef.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dict = snapshot.value as? [String: Any] else { return }
             
-            guard let caption = dict["caption"] as? String else {
-                return
-            }
-            guard let creationDate = dict["creationDate"] as? NSNumber else {
-                return
-            }
-            guard let imageHeight = dict["imageHeight"] as? CGFloat else {
-                return
-            }
-            guard let imageWidth = dict["imageWidth"] as? CGFloat else {
-                return
-            }
-            guard let imageUrl = dict["caption"] as? String else {
-                return
+            for dictionary in dict {
+               // print(dictionary)
+                
+                guard let eachDict = dictionary.value as? [String: Any] else { return }
+                guard let caption = eachDict["caption"] as? String else {
+                    return
+                }
+                guard let creationDate = eachDict["creationDate"] as? NSNumber else {
+                    return
+                }
+                guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
+                    return
+                }
+                guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
+                    return
+                }
+                guard let imageUrl = eachDict["caption"] as? String else {
+                    return
+                }
+                
+                let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+                print(post)
+                self.currentUserPosts.append(post)
             }
             
-            let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
-            print(post)
-            self.currentUserPosts.append(post)
+
             
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
-            
+
         }) { (error) in
-            print(error)
+            print(error.localizedDescription)
+            return
         }
+        
     }
     
     fileprivate func setupLogoutController() {
