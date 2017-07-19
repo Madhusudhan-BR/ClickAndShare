@@ -7,12 +7,13 @@
 //
 
 import UIKit
-
+import FirebaseDatabase
 
 
 class SearchController : UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
     let cellId = "cell"
+    var users = [User]()
     let searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.placeholder = "Enter search text"
@@ -25,6 +26,7 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
         
         collectionView?.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
          collectionView?.backgroundColor = UIColor.white
+        fetchUsers()
         collectionView?.alwaysBounceVertical = true 
         navigationController?.navigationBar.addSubview(searchBar)
         let navBar = navigationController?.navigationBar
@@ -36,15 +38,33 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return users.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCell
-        
+        let user = users[indexPath.item]
+        cell.user = user
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 60)
     }
+    
+    fileprivate func fetchUsers(){
+        let _ = Database.database().reference().child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userDictionaries = snapshot.value as? [String: Any] else { return }
+            userDictionaries.forEach({ (key,value) in
+                guard let dict = value as? [String: Any] else { return }
+                let user = User(uid: key, dictionary: dict)
+                self.users.append(user)
+            })
+            self.collectionView?.reloadData()
+        }) { (error) in
+            print(error)
+            
+        }
+    }
+    
+    
 }

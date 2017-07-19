@@ -10,6 +10,13 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
    
+    var user: User? {
+        didSet{
+            usernameLabel.text = user?.username
+            profileImageView.loadImage(urlString: user?.profileImageURL ?? "")
+        }
+    }
+    
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
         iv.layer.cornerRadius = 20
