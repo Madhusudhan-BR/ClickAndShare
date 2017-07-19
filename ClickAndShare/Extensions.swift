@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 extension UIColor {
     static func rgb(red: CGFloat, green:CGFloat , blue:CGFloat ) -> UIColor {
@@ -47,4 +48,16 @@ extension UIView {
         
     }
     
+}
+
+extension Database {
+    static func fetchuserWithUid(uid: String, completion: @escaping (User) -> ()) {
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userdict = snapshot.value as? [String: Any]  else { return }
+            let user = User(uid: uid, dictionary: userdict)
+            completion(user)
+        }) { (error) in
+            print(error)
+        }
+    }
 }

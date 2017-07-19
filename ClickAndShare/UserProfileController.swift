@@ -52,7 +52,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
             print(post)
             self.currentUserPosts.insert(post, at: 0)
-           // self.currentUserPosts.append(post)
+            // self.currentUserPosts.append(post)
             self.collectionView?.reloadData()
         }) { (error) in
             print(error)
@@ -62,7 +62,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     fileprivate func setupLogoutController() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal),  style: .plain, target: self, action: #selector(handleLogout))
     }
-
+    
     func handleLogout(){
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -75,9 +75,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             }catch let error {
                 print(error)
             }
-        
-        
-        
+            
+            
+            
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -86,7 +86,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! UserProfileHeader
-        header.user = self.user 
+        header.user = self.user
         return header
     }
     
@@ -128,18 +128,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
         self.currentUserID = UID
         
-        Database.database().reference().child("users").child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.fetchuserWithUid(uid: UID) { (user) in
             
             
-            if let dict = snapshot.value as? [String: Any] {
-                 self.user = User(uid: UID, dictionary: dict)
-                self.navigationItem.title = self.user?.username
-            }
+            self.user = user
+            self.navigationItem.title = self.user?.username
+            
             self.collectionView?.reloadData()
-            
-        }) { (error) in
-            print(error.localizedDescription)
         }
+        
+        
         
     }
     

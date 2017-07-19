@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+
+
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let cellID = "cell"
@@ -26,24 +28,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let currentuserID = Auth.auth().currentUser?.uid else {
             return }
         
-        Database.database().reference().child("users").child(currentuserID).observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let userdict = snapshot.value as? [String: Any]  else { return }
-            let user = User(uid: currentuserID, dictionary: userdict)
-            
+        Database.fetchuserWithUid(uid: currentuserID) { (user) in
             self.fetchPostsWithUser(user: user)
-           
-            
-        }) { (error) in
-            print(error)
         }
         
     }
    
     fileprivate func fetchPostsWithUser(user: User) {
-        guard let currentuserID = Auth.auth().currentUser?.uid else {
-            return }
-        
-        let postsRef = Database.database().reference().child("posts").child(currentuserID)
+       
+        let postsRef = Database.database().reference().child("posts").child(user.uid)
         postsRef.queryOrdered(byChild: "creationDate").observeSingleEvent(of: .value, with: { (snapshot) in
             guard let Dict = snapshot.value as? [String: Any] else { return }
             
