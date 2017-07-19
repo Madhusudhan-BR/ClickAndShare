@@ -26,9 +26,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let currentuserID = Auth.auth().currentUser?.uid else {
             return }
         
-        let postsRef = Database.database().reference().child("posts").child(currentuserID)
+        Database.database().reference().child("users").child(currentuserID).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userdict = snapshot.value as? [String: Any]  else { return }
+            let user = User(dictionary: userdict)
+            
+            
+            let postsRef = Database.database().reference().child("posts").child(currentuserID)
             postsRef.queryOrdered(byChild: "creationDate").observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let Dict = snapshot.value as? [String: Any] else { return }
+                guard let Dict = snapshot.value as? [String: Any] else { return }
                 
                 for eachDict in Dict{
                     guard let subDict = eachDict.value as? [String: Any] else { return }
@@ -47,22 +52,29 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     guard let imageUrl = subDict["imageUrl"] as? String else {
                         return
                     }
-                    
-                    let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+                  
+                    let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
                     print(post)
                     self.Posts.append(post)
-
+                    
                 }
                 
                 
                 DispatchQueue.main.async {
-                self.collectionView?.reloadData()
+                    self.collectionView?.reloadData()
+                }
+                
+                
+            }) { (error) in
+                print(error.localizedDescription)
             }
             
-
         }) { (error) in
-            print(error.localizedDescription)
+            print(error)
         }
+        
+        
+        
         
         
       

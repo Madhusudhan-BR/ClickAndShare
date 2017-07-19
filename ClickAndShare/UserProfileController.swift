@@ -49,7 +49,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
                 return
             }
             
-            let post = Post(caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+            let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
             print(post)
             self.currentUserPosts.append(post)
             self.collectionView?.reloadData()

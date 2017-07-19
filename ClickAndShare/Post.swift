@@ -14,13 +14,14 @@ class  Post: NSObject {
     var imageWidth: CGFloat?
     var imageUrl: String?
     var creationDate: NSNumber?
+    var user: User
     
-    
-    init(caption: String, imageHeight: CGFloat, imageWidth: CGFloat, imageUrl: String, creationDate: NSNumber) {
+    init(user: User,caption: String, imageHeight: CGFloat, imageWidth: CGFloat, imageUrl: String, creationDate: NSNumber) {
         self.caption = caption
         self.imageHeight = imageHeight
         self.imageWidth = imageWidth
         self.imageUrl = imageUrl
         self.creationDate = creationDate
+        self.user = user
     }
 }
