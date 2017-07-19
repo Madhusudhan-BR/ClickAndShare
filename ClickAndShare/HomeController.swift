@@ -28,56 +28,58 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         Database.database().reference().child("users").child(currentuserID).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let userdict = snapshot.value as? [String: Any]  else { return }
-            let user = User(dictionary: userdict)
+            let user = User(uid: currentuserID, dictionary: userdict)
             
-            
-            let postsRef = Database.database().reference().child("posts").child(currentuserID)
-            postsRef.queryOrdered(byChild: "creationDate").observeSingleEvent(of: .value, with: { (snapshot) in
-                guard let Dict = snapshot.value as? [String: Any] else { return }
-                
-                for eachDict in Dict{
-                    guard let subDict = eachDict.value as? [String: Any] else { return }
-                    guard let caption = subDict["caption"] as? String else {
-                        return
-                    }
-                    guard let creationDate = subDict["creationDate"] as? NSNumber else {
-                        return
-                    }
-                    guard let imageHeight = subDict["imageHeight"] as? CGFloat else {
-                        return
-                    }
-                    guard let imageWidth = subDict["imageWidth"] as? CGFloat else {
-                        return
-                    }
-                    guard let imageUrl = subDict["imageUrl"] as? String else {
-                        return
-                    }
-                  
-                    let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
-                    print(post)
-                    self.Posts.append(post)
-                    
-                }
-                
-                
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
-                }
-                
-                
-            }) { (error) in
-                print(error.localizedDescription)
-            }
+            self.fetchPostsWithUser(user: user)
+           
             
         }) { (error) in
             print(error)
         }
         
+    }
+   
+    fileprivate func fetchPostsWithUser(user: User) {
+        guard let currentuserID = Auth.auth().currentUser?.uid else {
+            return }
         
-        
-        
-        
-      
+        let postsRef = Database.database().reference().child("posts").child(currentuserID)
+        postsRef.queryOrdered(byChild: "creationDate").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let Dict = snapshot.value as? [String: Any] else { return }
+            
+            for eachDict in Dict{
+                guard let subDict = eachDict.value as? [String: Any] else { return }
+                guard let caption = subDict["caption"] as? String else {
+                    return
+                }
+                guard let creationDate = subDict["creationDate"] as? NSNumber else {
+                    return
+                }
+                guard let imageHeight = subDict["imageHeight"] as? CGFloat else {
+                    return
+                }
+                guard let imageWidth = subDict["imageWidth"] as? CGFloat else {
+                    return
+                }
+                guard let imageUrl = subDict["imageUrl"] as? String else {
+                    return
+                }
+                
+                let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+                print(post)
+                self.Posts.append(post)
+                
+            }
+            
+            
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

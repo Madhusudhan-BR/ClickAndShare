@@ -51,7 +51,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
             print(post)
-            self.currentUserPosts.append(post)
+            self.currentUserPosts.insert(post, at: 0)
+           // self.currentUserPosts.append(post)
             self.collectionView?.reloadData()
         }) { (error) in
             print(error)
@@ -131,7 +132,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             
             if let dict = snapshot.value as? [String: Any] {
-                 self.user = User(dictionary: dict)
+                 self.user = User(uid: UID, dictionary: dict)
                 self.navigationItem.title = self.user?.username
             }
             self.collectionView?.reloadData()

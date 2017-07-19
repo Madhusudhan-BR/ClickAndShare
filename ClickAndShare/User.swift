@@ -10,14 +10,14 @@ import Foundation
 
 class User : NSObject {
     
-    var username: String
-    var profileImageURL : String
+    let username: String
+    let profileImageURL : String
+    let uid: String
     
-    
-     init(dictionary : [String: Any]) {
+    init(uid: String, dictionary : [String: Any]) {
         self.username = dictionary["username"] as? String ?? ""
         self.profileImageURL = dictionary["profileImageURL"] as? String ?? ""
-        
+        self.uid = uid
     }
     
 }
