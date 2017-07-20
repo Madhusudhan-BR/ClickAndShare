@@ -34,6 +34,7 @@
 		9B69627A1F1E41050078F9B2 /* HomeFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962791F1E41050078F9B2 /* HomeFeedCell.swift */; };
 		9B69627D1F1F81DB0078F9B2 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69627C1F1F81DB0078F9B2 /* SearchController.swift */; };
 		9B6962801F1F8A550078F9B2 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69627F1F1F8A550078F9B2 /* SearchCell.swift */; };
+		9B6962831F20BB790078F9B2 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962821F20BB790078F9B2 /* CameraController.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		9B6962791F1E41050078F9B2 /* HomeFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFeedCell.swift; sourceTree = "<group>"; };
 		9B69627C1F1F81DB0078F9B2 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		9B69627F1F1F8A550078F9B2 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		9B6962821F20BB790078F9B2 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				9B6962631F148AF10078F9B2 /* Login */,
 				9B69627B1F1F81C10078F9B2 /* Tab bar Controllers */,
 				9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */,
+				9B6962841F20BB800078F9B2 /* Camera */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -314,6 +317,14 @@
 				9B69627F1F1F8A550078F9B2 /* SearchCell.swift */,
 			);
 			name = SearchFeed;
+			sourceTree = "<group>";
+		};
+		9B6962841F20BB800078F9B2 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				9B6962821F20BB790078F9B2 /* CameraController.swift */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		B51D046E8D52F76EDC1F3C62 /* Frameworks */ = {
@@ -620,6 +631,7 @@
 				9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */,
 				9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */,
 				9B6962701F1A75900078F9B2 /* Post.swift in Sources */,
+				9B6962831F20BB790078F9B2 /* CameraController.swift in Sources */,
 				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
 				9B6962771F1E31EA0078F9B2 /* HomeController.swift in Sources */,
 				9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */,

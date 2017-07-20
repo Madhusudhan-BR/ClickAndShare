@@ -18,6 +18,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBarItems()
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(HomeFeedCell.self, forCellWithReuseIdentifier: cellID)
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdate), name: ShareController.notificationName, object: nil)
@@ -27,6 +28,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     }
     
+    func setupNavigationBarItems(){
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3"), style: .plain, target: self, action: #selector(handleCamera))
+    }
+    
+    func handleCamera() {
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+    }
     func handleUpdate(){
         handleRefresh()
     }
