@@ -49,7 +49,7 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     
     func fetchPhotos(){
         let options =  PHFetchOptions()
-        options.fetchLimit = 3
+        //options.fetchLimit = 3
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         options.sortDescriptors = [sortDescriptor]
         let allPhotos = PHAsset.fetchAssets(with: .image, options:options )
