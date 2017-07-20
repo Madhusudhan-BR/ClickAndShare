@@ -11,6 +11,7 @@ import Firebase
 
 class ShareController : UIViewController {
     
+    static let notificationName = Notification.Name(rawValue: "updateFeed")
     
     var selectedImage : UIImage? {
         didSet{
@@ -106,6 +107,8 @@ class ShareController : UIViewController {
                 print(error.localizedDescription)
                 return
             }
+            
+            let notification = NotificationCenter.default.post(name: ShareController.notificationName, object: nil)
             
             self.dismiss(animated: true, completion: nil)
             

@@ -20,8 +20,26 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(HomeFeedCell.self, forCellWithReuseIdentifier: cellID)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdate), name: ShareController.notificationName, object: nil)
+        fetchAll()
+        let refreshControl = UIRefreshControl()
+        collectionView?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+    }
+    
+    func handleUpdate(){
+        handleRefresh()
+    }
+    
+    func handleRefresh(){
+        Posts.removeAll()
+        fetchAll()
+    }
+    
+    fileprivate func fetchAll(){
         fetchPosts()
         fetchFollowingUserPosts()
+
     }
     
     func fetchFollowingUserPosts() {
@@ -80,9 +98,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 
             }
             
+            
             self.Posts.sort(by: { (p1, p2) -> Bool in
                 return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
             })
+            self.collectionView?.refreshControl?.endRefreshing()
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
