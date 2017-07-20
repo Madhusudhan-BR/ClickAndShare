@@ -25,7 +25,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func fetchFollowingUserPosts() {
-        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Database.database().reference().child("follow").child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            dict.forEach({ (key,value) in
+                Database.fetchuserWithUid(uid: key, completion: { (user) in
+                    self.fetchPostsWithUser(user: user)
+                })
+            })
+        }) { (error) in
+            print(error)
+        }
     }
     
     func fetchPosts() {
