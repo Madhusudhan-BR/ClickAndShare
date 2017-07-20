@@ -22,7 +22,7 @@ class HomeFeedCell: UICollectionViewCell {
     func setupAttributedText(){
         let attributedText = NSMutableAttributedString(string: "\(String(describing: post!.user.username))", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "  \(post!.caption!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
-        attributedText.append(NSAttributedString(string: "\n1 week ago", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray]))
+        attributedText.append(NSAttributedString(string: "\n\(String(describing: post!.date.timeAgoDisplay()))", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray]))
         
         captionLabel.attributedText = attributedText
 

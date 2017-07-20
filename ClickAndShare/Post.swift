@@ -14,6 +14,7 @@ class  Post: NSObject {
     var imageWidth: CGFloat?
     var imageUrl: String?
     var creationDate: NSNumber?
+    var date: Date
     var user: User
     
     init(user: User,caption: String, imageHeight: CGFloat, imageWidth: CGFloat, imageUrl: String, creationDate: NSNumber) {
@@ -22,6 +23,8 @@ class  Post: NSObject {
         self.imageWidth = imageWidth
         self.imageUrl = imageUrl
         self.creationDate = creationDate
+        let seconds = Date(timeIntervalSince1970: creationDate as? Double ?? 0)
+        self.date = seconds
         self.user = user
     }
 }

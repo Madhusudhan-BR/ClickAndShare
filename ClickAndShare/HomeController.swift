@@ -75,11 +75,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 
                 let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
                 print(post)
-                self.Posts.append(post)
+                self.Posts.append(post
+                )
                 
             }
             
-            
+            self.Posts.sort(by: { (p1, p2) -> Bool in
+                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+            })
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
