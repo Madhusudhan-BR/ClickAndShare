@@ -21,6 +21,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(HomeFeedCell.self, forCellWithReuseIdentifier: cellID)
         fetchPosts()
+        fetchFollowingUserPosts()
+    }
+    
+    func fetchFollowingUserPosts() {
+        
     }
     
     func fetchPosts() {

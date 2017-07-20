@@ -30,8 +30,10 @@ class UserProfileHeader: UICollectionViewCell {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
             return
         }
-        Database.database().reference().child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
+        Database.database().reference().child("follow").child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(self.user?.uid ?? "",self.user?.username ?? "")
+            print(snapshot.value)
+            if let isFollowing = snapshot.value as? String, isFollowing == "1" {
                 self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
                 self.editProfileFollowButton.backgroundColor = UIColor.white
                 self.editProfileFollowButton.setTitleColor(UIColor.black, for: .normal)
