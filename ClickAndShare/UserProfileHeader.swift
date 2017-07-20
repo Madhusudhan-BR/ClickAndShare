@@ -26,21 +26,28 @@ class UserProfileHeader: UICollectionViewCell {
     
     fileprivate func setupEditProfileFolloeButton() {
         guard let currentLoggedinUserId = Auth.auth().currentUser?.uid else { return }
-        
-        Database.database().reference().child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let 
-        }) { (error) in
-            
-        }
-        
         if user?.uid == currentLoggedinUserId {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
+            return
         }
-        else {
-            editProfileFollowButton.setTitle("Follow", for: .normal)
-            self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
-            self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
+        Database.database().reference().child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
+                self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                self.editProfileFollowButton.backgroundColor = UIColor.white
+                self.editProfileFollowButton.setTitleColor(UIColor.black, for: .normal)
+
+            } else {
+                self.editProfileFollowButton.setTitle("Follow", for: .normal)
+                self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
+
+            }
+        }) { (error) in
+            print(error)
         }
+        
+       
+        
     }
     
     let usernameLabel : UILabel = {
