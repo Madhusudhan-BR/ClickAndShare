@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class UserProfileHeader: UICollectionViewCell {
     
@@ -16,8 +18,28 @@ class UserProfileHeader: UICollectionViewCell {
             guard  let url = user?.profileImageURL  else {
                 return
             }
+            setupEditProfileFolloeButton()
             self.profileImageView.loadImage(urlString: url)
             usernameLabel.text = user?.username
+        }
+    }
+    
+    fileprivate func setupEditProfileFolloeButton() {
+        guard let currentLoggedinUserId = Auth.auth().currentUser?.uid else { return }
+        
+        Database.database().reference().child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let 
+        }) { (error) in
+            
+        }
+        
+        if user?.uid == currentLoggedinUserId {
+            editProfileFollowButton.setTitle("Edit Profile", for: .normal)
+        }
+        else {
+            editProfileFollowButton.setTitle("Follow", for: .normal)
+            self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
         }
     }
     
@@ -97,15 +119,52 @@ class UserProfileHeader: UICollectionViewCell {
         return button
     }()
     
-    let editProfileButton: UIButton = {
+    lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Edit button", for: .normal)
+        //button.setTitle("Edit button", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 3
+        button.addTarget(self, action:#selector(handleEditProfileFollowButton), for: .touchUpInside)
         return button
     }()
+    
+    func handleEditProfileFollowButton() {
+        
+        guard let currentLoggedinUserId = Auth.auth().currentUser?.uid else { return }
+
+        
+        if editProfileFollowButton.titleLabel?.text == "Edit Profile" {
+            
+        } else if editProfileFollowButton.titleLabel?.text == "Follow" {
+            
+            
+            let values = [(user?.uid)! : "1"]
+            Database.database().reference().child("follow").child(currentLoggedinUserId).updateChildValues(values, withCompletionBlock: { (error, ref) in
+                if let error = error {
+                    print("unable to follow", error)
+                }
+                print("successfully followed user", self.user?.username ?? "")
+                self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                self.editProfileFollowButton.backgroundColor = UIColor.white
+                self.editProfileFollowButton.setTitleColor(UIColor.black, for: .normal)
+            })
+            
+        
+        } else if editProfileFollowButton.titleLabel?.text == "Unfollow" {
+            Database.database().reference().child("follow").child(currentLoggedinUserId).child(user!.uid).removeValue(completionBlock: { (error, ref) in
+                if let error = error {
+                    print("unable to unfollow", error)
+                }
+                print("unfollowed User", self.user?.username ?? "")
+                self.editProfileFollowButton.setTitle("Follow", for: .normal)
+                self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
+            })
+            
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,8 +178,8 @@ class UserProfileHeader: UICollectionViewCell {
         
         setupUserStats()
         
-        addSubview(editProfileButton)
-        editProfileButton.anchor(top: postsLabel.bottomAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 34)
+        addSubview(editProfileFollowButton)
+        editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 34)
         
         
     }

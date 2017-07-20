@@ -12,6 +12,7 @@ import Firebase
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var user: User?
+    var userId: String?
     var currentUserID: String?
     var currentUserPosts = [Post]()
     
@@ -24,7 +25,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         setupLogoutController()
         
-        observeMyPosts()
+        
     }
     
     fileprivate func observeMyPosts(){
@@ -123,17 +124,17 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     fileprivate func fetchUser(){
-        guard let UID = Auth.auth().currentUser?.uid else {
-            return
-        }
+
+        
+        let UID = self.userId ?? Auth.auth().currentUser?.uid ?? ""
         self.currentUserID = UID
         
         Database.fetchuserWithUid(uid: UID) { (user) in
             
             
             self.user = user
-            self.navigationItem.title = self.user?.username
-            
+            self.navigationItem.title = user.username
+            self.observeMyPosts()
             self.collectionView?.reloadData()
         }
         

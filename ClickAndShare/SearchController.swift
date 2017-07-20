@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 
 class SearchController : UICollectionViewController,UICollectionViewDelegateFlowLayout,UISearchBarDelegate  {
@@ -37,11 +38,17 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
         
         collectionView?.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
          collectionView?.backgroundColor = UIColor.white
+        collectionView?.keyboardDismissMode = .interactive
         fetchUsers()
         collectionView?.alwaysBounceVertical = true 
         navigationController?.navigationBar.addSubview(searchBar)
         let navBar = navigationController?.navigationBar
         searchBar.anchor(top: navBar?.topAnchor, left: navBar?.leftAnchor, bottom: navBar?.bottomAnchor, right: navBar?.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        searchBar.isHidden = false
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -58,6 +65,16 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
         cell.user = user
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.isHidden = true
+        searchBar.resignFirstResponder()
+        let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.userId = filteredUsers[indexPath.item].uid
+        navigationController?.pushViewController(userProfileController, animated: true)
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 60)
     }
@@ -67,6 +84,9 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
             guard let userDictionaries = snapshot.value as? [String: Any] else { return }
             userDictionaries.forEach({ (key,value) in
                 guard let dict = value as? [String: Any] else { return }
+                if key == Auth.auth().currentUser?.uid {
+                    return
+                }
                 let user = User(uid: key, dictionary: dict)
                 self.users.append(user)
                 self.users.sort(by: { (user1, user2) -> Bool in
