@@ -9,9 +9,10 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
+class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewControllerTransitioningDelegate {
     
     let output = AVCapturePhotoOutput()
+    let customTransition = CustomTransition()
     
     let captureButton: UIButton = {
         let button = UIButton(type: .system)
@@ -62,7 +63,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCameraSession()
-        
+        transitioningDelegate = self
         view.addSubview(captureButton)
         captureButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: -24, paddingRight: 0, width: 80, height: 80)
         captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -70,6 +71,11 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         view.addSubview(dismissButton)
         dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 60)
     }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return customTransition
+    }
+    
     
     override var prefersStatusBarHidden: Bool {
         return true 
