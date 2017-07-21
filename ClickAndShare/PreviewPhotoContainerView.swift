@@ -46,8 +46,20 @@ class PreviewPhotoContainerView : UIView {
                 print(error)
                 return
             }
+            
+            print("saved to library")
+            DispatchQueue.main.async {
+                let label = UILabel()
+                label.text = "Saved Successfully"
+                label.textColor = UIColor.white
+                label.backgroundColor = UIColor(white: 0, alpha: 0.2)
+                self.addSubview(label)
+                label.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
+                label.center = self.center
+                
+            }
         }
-        print("saved to library")
+        
     }
     
     override init(frame: CGRect) {
