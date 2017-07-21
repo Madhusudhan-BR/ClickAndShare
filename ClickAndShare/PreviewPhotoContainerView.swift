@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class PreviewPhotoContainerView : UIView {
     
@@ -34,7 +35,19 @@ class PreviewPhotoContainerView : UIView {
     }()
     
     func handleSave() {
-        print("handling save")
+       
+        guard let previewImage = imageView.image else { return }
+        let library = PHPhotoLibrary.shared()
+        
+        library.performChanges({ 
+            PHAssetChangeRequest.creationRequestForAsset(from: previewImage)
+        }) { (success, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+        }
+        print("saved to library")
     }
     
     override init(frame: CGRect) {
