@@ -15,17 +15,27 @@ class PreviewPhotoContainerView : UIView {
         return iv
     }()
     
-    let cancelButton: UIButton = {
+    lazy var cancelButton: UIButton = {
         let options = UIButton(type: .system)
         options.setImage(#imageLiteral(resourceName: "cancel_shadow").withRenderingMode(.alwaysOriginal), for: .normal)
+        options.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return options
     }()
     
-    let saveButton: UIButton = {
+    func handleCancel() {
+        self.removeFromSuperview()
+    }
+    
+    lazy var saveButton: UIButton = {
         let options = UIButton(type: .system)
         options.setImage(#imageLiteral(resourceName: "save_shadow").withRenderingMode(.alwaysOriginal), for: .normal)
+         options.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         return options
     }()
+    
+    func handleSave() {
+        print("handling save")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

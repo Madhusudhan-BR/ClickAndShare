@@ -71,6 +71,10 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 60)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true 
+    }
+    
     fileprivate func setupCameraSession(){
         let captureSession = AVCaptureSession()
         // step 1 : setup inputs  
