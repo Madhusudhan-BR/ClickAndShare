@@ -49,31 +49,35 @@ class PreviewPhotoContainerView : UIView {
             
             print("saved to library")
             DispatchQueue.main.async {
-                let label = UILabel()
-                label.text = "Saved Successfully"
-                label.textColor = UIColor.white
-                label.backgroundColor = UIColor(white: 0, alpha: 0.2)
-                self.addSubview(label)
-                label.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
-                label.center = self.center
-                
-                label.layer.transform = CATransform3DMakeScale(0, 0, 0)
-                label.alpha = 0
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { 
-                    label.layer.transform = CATransform3DMakeScale(1, 1, 1)
-                    label.alpha = 1
-                }, completion: { (completed) in
-                    UIView.animate(withDuration: 0.5, delay: 0.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { 
-                        label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
-                        label.alpha = 1
-                    }, completion: { (_) in
-                        label.removeFromSuperview()
-                    })
-                })
-                
+                self.saveFeedack()
             }
         }
         
+    }
+    
+    func saveFeedack() {
+        let label = UILabel()
+        label.text = "Saved Successfully"
+        label.textColor = UIColor.white
+        label.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        self.addSubview(label)
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
+        label.center = self.center
+        
+        label.layer.transform = CATransform3DMakeScale(0, 0, 0)
+        label.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            label.layer.transform = CATransform3DMakeScale(1, 1, 1)
+            label.alpha = 1
+        }, completion: { (completed) in
+            UIView.animate(withDuration: 0.5, delay: 0.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+                label.alpha = 1
+            }, completion: { (_) in
+                label.removeFromSuperview()
+            })
+        })
+
     }
     
     override init(frame: CGRect) {
