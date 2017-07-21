@@ -57,6 +57,20 @@ class PreviewPhotoContainerView : UIView {
                 label.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
                 label.center = self.center
                 
+                label.layer.transform = CATransform3DMakeScale(0, 0, 0)
+                label.alpha = 0
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { 
+                    label.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                    label.alpha = 1
+                }, completion: { (completed) in
+                    UIView.animate(withDuration: 0.5, delay: 0.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { 
+                        label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+                        label.alpha = 1
+                    }, completion: { (_) in
+                        label.removeFromSuperview()
+                    })
+                })
+                
             }
         }
         
