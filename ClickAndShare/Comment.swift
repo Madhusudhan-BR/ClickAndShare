@@ -14,7 +14,7 @@ class Comment: NSObject {
     var creationDate: Double?
     var text: String?
     var uid: String?
-    
+    var  user: User?
     
     init(id: String, commentDictionary: [String: Any]) {
         self.creationDate = commentDictionary["creationDate"] as? Double

@@ -79,9 +79,17 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
             guard let commentDict = snapshot.value as? [String: Any] else {
                 return
             }
-            let comment = Comment(id: snapshot.key, commentDictionary: commentDict)
-            self.comments.append(comment)
-            self.collectionView?.reloadData()
+            
+            guard let userId = commentDict["uid"] as? String else {
+                return 
+            }
+            Database.fetchuserWithUid(uid: userId) { (user) in
+                let comment = Comment(id: snapshot.key, commentDictionary: commentDict)
+                comment.user = user
+                self.comments.append(comment)
+                self.collectionView?.reloadData()
+            }
+        
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -92,7 +100,7 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
+        return CGSize(width: view.frame.width, height: 60)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comments.count
@@ -100,13 +108,7 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CommentCell
         let comment = comments[indexPath.item]
-        cell.commentLabel.text = comment.text
-        if let userId = comment.uid {
-            Database.fetchuserWithUid(uid: userId) { (user) in
-                cell.user = user
-            }
-        }
-       
+        cell.comment = comment
         return cell
     }
     

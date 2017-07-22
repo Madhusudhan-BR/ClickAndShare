@@ -10,12 +10,16 @@ import UIKit
 
 class CommentCell: UICollectionViewCell {
     
-    var user: User?{
-        didSet {
-            self.usernameLabel.text = user?.username
-            self.profileImageView.loadImage(urlString: user?.profileImageURL ?? "")
+    var comment:Comment? {
+        didSet{
+            self.profileImageView.loadImage(urlString: comment?.user?.profileImageURL ?? "")
+            
+            self.usernameLabel.text = comment?.user?.username
+            print(comment?.user)
+            self.commentLabel.text = comment?.text
         }
     }
+
     
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
