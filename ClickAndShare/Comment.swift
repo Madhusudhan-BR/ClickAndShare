@@ -9,8 +9,17 @@
 import Foundation
 
 class Comment: NSObject {
-
+    
+    var commentId: String?
     var creationDate: Double?
     var text: String?
+    var uid: String?
+    
+    init(id: String, commentDictionary: [String: Any]) {
+        self.creationDate = commentDictionary["creationDate"] as? Double
+        self.text = commentDictionary["text"] as? String
+        self.uid = commentDictionary["uid"]  as? String
+        self.commentId = id 
+    }
 
 }

@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 
 class CommentsController: UICollectionViewController,UICollectionViewDelegateFlowLayout  {
-   
+    
+    var comments = [Comment]()
     var post: Post?
     let cellId = "cell"
     let containerView: UIView = {
@@ -65,6 +66,23 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         inpuTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
         
         submitButton.anchor(top: containerView.topAnchor, left: nil, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 0)
+        fetchComments()
+    }
+    
+    func fetchComments(){
+        guard let  postId = self.post?.postId else {
+            return
+        }
+        Database.database().reference().child("comments").child(postId).observe(.childAdded, with: { (snapshot) in
+            guard let commentDict = snapshot.value as? [String: Any] else {
+                return
+            }
+            let comment = Comment(id: snapshot.key, commentDictionary: commentDict)
+            self.comments.append(comment)
+            self.collectionView?.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -75,10 +93,12 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         return CGSize(width: view.frame.width, height: 80)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return comments.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CommentCell
+        let comment = comments[indexPath.item]
+        cell.commentLabel.text = comment.text
         return cell
     }
     
