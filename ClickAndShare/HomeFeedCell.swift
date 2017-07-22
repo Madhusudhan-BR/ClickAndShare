@@ -8,7 +8,12 @@
 
 import UIKit
 
+protocol  HomeFeedDelegate {
+    func loadCommentsController(post: Post)
+}
+
 class HomeFeedCell: UICollectionViewCell {
+    var delegate: HomeFeedDelegate?
     
     var post: Post? {
         didSet {
@@ -51,12 +56,21 @@ class HomeFeedCell: UICollectionViewCell {
         return options
     }()
     
-    let commentButton: UIButton = {
+    lazy var commentButton: UIButton = {
         let options = UIButton(type: .system)
         options.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
+        options.addTarget(self, action: #selector(handleComments), for: .touchUpInside)
         options.setTitleColor(UIColor.black, for: .normal)
         return options
     }()
+    
+    func handleComments(){
+        print("Trying to post comments")
+        guard  let post = self.post else {
+            return
+        }
+        delegate?.loadCommentsController(post: post)
+    }
     
     var usernameLabel: UILabel = {
         let label = UILabel()

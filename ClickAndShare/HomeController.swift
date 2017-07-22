@@ -11,7 +11,7 @@ import Firebase
 
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeFeedDelegate{
     
     let cellID = "cell"
     var Posts = [Post]()
@@ -139,6 +139,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomeFeedCell
         let post = Posts[indexPath.row]
         cell.post = post
+        cell.delegate = self
         return cell 
+    }
+    
+    func loadCommentsController(post: Post) {
+        print("Print from controller")
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(commentsController, animated: true) 
     }
 }

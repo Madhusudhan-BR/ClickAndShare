@@ -38,6 +38,7 @@
 		9B6962861F21A9250078F9B2 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962851F21A9250078F9B2 /* PreviewPhotoContainerView.swift */; };
 		9B6962881F21D2C10078F9B2 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962871F21D2C10078F9B2 /* CustomTransition.swift */; };
 		9B69628A1F23148A0078F9B2 /* CustomDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962891F23148A0078F9B2 /* CustomDismissTransition.swift */; };
+		9B6962CB1F23330C0078F9B2 /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962CA1F23330C0078F9B2 /* CommentsController.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -100,6 +101,7 @@
 		9B6962851F21A9250078F9B2 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
 		9B6962871F21D2C10078F9B2 /* CustomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
 		9B6962891F23148A0078F9B2 /* CustomDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDismissTransition.swift; sourceTree = "<group>"; };
+		9B6962CA1F23330C0078F9B2 /* CommentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				9B69627B1F1F81C10078F9B2 /* Tab bar Controllers */,
 				9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */,
 				9B6962841F20BB800078F9B2 /* Camera */,
+				9B6962CC1F23334A0078F9B2 /* Comment */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -334,6 +337,14 @@
 				9B6962891F23148A0078F9B2 /* CustomDismissTransition.swift */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		9B6962CC1F23334A0078F9B2 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				9B6962CA1F23330C0078F9B2 /* CommentsController.swift */,
+			);
+			name = Comment;
 			sourceTree = "<group>";
 		};
 		B51D046E8D52F76EDC1F3C62 /* Frameworks */ = {
@@ -653,6 +664,7 @@
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,
 				9B6962881F21D2C10078F9B2 /* CustomTransition.swift in Sources */,
 				9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */,
+				9B6962CB1F23330C0078F9B2 /* CommentsController.swift in Sources */,
 				9B69626E1F1A3E4D0078F9B2 /* ShareController.swift in Sources */,
 				9B6962671F15CD960078F9B2 /* PhotoSelectorController.swift in Sources */,
 			);
