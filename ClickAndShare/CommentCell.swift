@@ -13,10 +13,9 @@ class CommentCell: UICollectionViewCell {
     var comment:Comment? {
         didSet{
             self.profileImageView.loadImage(urlString: comment?.user?.profileImageURL ?? "")
-            
-            self.usernameLabel.text = comment?.user?.username
-            print(comment?.user)
-            self.commentLabel.text = comment?.text
+            var attributedText = NSMutableAttributedString(string: comment?.user?.username ?? "" , attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string:  " " + (comment?.text)! , attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
+            self.commentLabel.attributedText = attributedText
         }
     }
 
@@ -49,18 +48,16 @@ class CommentCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(profileImageView)
-        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
-        
-        addSubview(usernameLabel)
-        usernameLabel.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: profileImageView.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        addSubview(commentLabel)
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        commentLabel.anchor(top: topAnchor ,left: profileImageView.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 8, width: 0, height: 0)
         
         let seperatorView = UIView()
-         addSubview(seperatorView)
         seperatorView.backgroundColor = UIColor(white: 0, alpha: 0.3)
-        seperatorView.anchor(top: bottomAnchor, left: usernameLabel.leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        addSubview(seperatorView)
+        seperatorView.anchor(top: bottomAnchor, left: commentLabel.leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
-        addSubview(commentLabel)
-        commentLabel.anchor(top: usernameLabel.bottomAnchor, left: usernameLabel.leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
        
     }
     
