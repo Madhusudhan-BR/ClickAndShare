@@ -61,6 +61,8 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView?.register(CommentCell.self ,forCellWithReuseIdentifier: cellId)
         collectionView?.backgroundColor = UIColor.white
         containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0) 
         containerView.addSubview(inpuTextField)
         containerView.addSubview(submitButton)
         inpuTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
