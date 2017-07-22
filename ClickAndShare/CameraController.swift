@@ -13,6 +13,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     
     let output = AVCapturePhotoOutput()
     let customTransition = CustomTransition()
+    let customDismissTransition = CustomDismissTransition()
     
     let captureButton: UIButton = {
         let button = UIButton(type: .system)
@@ -75,7 +76,9 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return customTransition
     }
-    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return customDismissTransition
+    }
     
     override var prefersStatusBarHidden: Bool {
         return true 
