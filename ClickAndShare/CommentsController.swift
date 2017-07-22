@@ -99,6 +99,12 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CommentCell
         let comment = comments[indexPath.item]
         cell.commentLabel.text = comment.text
+        if let userId = comment.uid {
+            Database.fetchuserWithUid(uid: userId) { (user) in
+                cell.user = user
+            }
+        }
+       
         return cell
     }
     

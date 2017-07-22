@@ -10,6 +10,13 @@ import UIKit
 
 class CommentCell: UICollectionViewCell {
     
+    var user: User?{
+        didSet {
+            self.usernameLabel.text = user?.username
+            self.profileImageView.loadImage(urlString: user?.profileImageURL ?? "")
+        }
+    }
+    
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
         iv.layer.cornerRadius = 20
