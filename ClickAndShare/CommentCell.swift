@@ -13,7 +13,7 @@ class CommentCell: UICollectionViewCell {
     var comment:Comment? {
         didSet{
             self.profileImageView.loadImage(urlString: comment?.user?.profileImageURL ?? "")
-            var attributedText = NSMutableAttributedString(string: comment?.user?.username ?? "" , attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText = NSMutableAttributedString(string: comment?.user?.username ?? "" , attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
             attributedText.append(NSAttributedString(string:  " " + (comment?.text)! , attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
             self.commentLabel.attributedText = attributedText
         }

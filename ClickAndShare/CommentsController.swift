@@ -100,7 +100,16 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 60)
+        
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 60)
+        let dummycell = CommentCell(frame: frame)
+        dummycell.comment = comments[indexPath.item]
+        dummycell.layoutIfNeeded()
+        
+        let targetSize = CGSize(width: view.frame.width, height: 1000)
+        let estimatedSize = dummycell.systemLayoutSizeFitting(targetSize)
+        let height = max(60, estimatedSize.height)
+        return CGSize(width: view.frame.width, height: height)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comments.count
