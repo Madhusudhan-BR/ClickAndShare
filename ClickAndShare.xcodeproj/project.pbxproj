@@ -215,9 +215,9 @@
 		9B69625A1F1359510078F9B2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */,
 				9B6962631F148AF10078F9B2 /* Login */,
 				9B69627B1F1F81C10078F9B2 /* Tab bar Controllers */,
-				9B69626D1F1A3E4C0078F9B2 /* ShareController.swift */,
 				9B6962841F20BB800078F9B2 /* Camera */,
 				9B6962CC1F23334A0078F9B2 /* Comment */,
 			);

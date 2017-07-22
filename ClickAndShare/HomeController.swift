@@ -99,8 +99,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let imageUrl = subDict["imageUrl"] as? String else {
                     return
                 }
+                guard let key = eachDict.key as? String else { return }
                 
-                let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+                let post = Post(user: user, caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
                 print(post)
                 self.Posts.append(post
                 )
@@ -146,6 +147,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func loadCommentsController(post: Post) {
         print("Print from controller")
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.post = post 
         navigationController?.pushViewController(commentsController, animated: true) 
     }
 }

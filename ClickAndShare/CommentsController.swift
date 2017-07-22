@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class CommentsController: UICollectionViewController  {
    
+    var post: Post?
     
     let containerView: UIView = {
         let container = UIView()
@@ -24,7 +26,25 @@ class CommentsController: UICollectionViewController  {
     }()
     
     func handleSubmit() {
-        print("submitting...........")
+        guard  let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        guard  let text = inpuTextField.text else {
+            return
+        }
+        guard let  postId = self.post?.postId else {
+            return
+        }
+        let values = ["uid": uid, "creationDate": Date().timeIntervalSince1970, "text": text] as [String: Any]
+        
+        Database.database().reference().child("comments").child(postId).childByAutoId().updateChildValues(values) { (error, ref) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.inpuTextField.text = "" 
+            print("uploaded post to db")
+        }
     }
     
     let inpuTextField: UITextField = {
@@ -56,7 +76,7 @@ class CommentsController: UICollectionViewController  {
     }
     
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
     }

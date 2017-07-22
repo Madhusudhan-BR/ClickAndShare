@@ -49,8 +49,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             guard let imageUrl = eachDict["imageUrl"] as? String else {
                 return
             }
+            guard let key = snapshot.key as? String else { return }
             
-            let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate)
+            let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
             print(post)
             self.currentUserPosts.insert(post, at: 0)
             // self.currentUserPosts.append(post)
