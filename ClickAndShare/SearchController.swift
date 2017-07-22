@@ -79,7 +79,27 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
         return CGSize(width: view.frame.width, height: 60)
     }
     
-    fileprivate func fetchUsers(){
+     func fetchUsers(){
+        
+//        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+//            guard let userDictionary = snapshot.value as? [String: Any] else { return }
+//            if snapshot.key == Auth.auth().currentUser?.uid {
+//                return
+//            }
+//            
+//            let user = User(uid: snapshot.key, dictionary: userDictionary)
+//            self.users.append(user)
+//            
+//            
+//        }) { (error) in
+//            print(error)
+//    }
+//        
+//        self.users.sort(by: { (user1, user2) -> Bool in
+//            return user1.username.compare(user2.username) == .orderedAscending
+//        })
+//        self.collectionView?.reloadData()
+        
         let _ = Database.database().reference().child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             guard let userDictionaries = snapshot.value as? [String: Any] else { return }
             userDictionaries.forEach({ (key,value) in
