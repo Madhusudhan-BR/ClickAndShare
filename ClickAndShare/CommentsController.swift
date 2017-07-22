@@ -13,9 +13,19 @@ class CommentsController: UICollectionViewController  {
     
     let containerView: UIView = {
         let container = UIView()
-        container.backgroundColor = UIColor.green
         return container
     }()
+    
+    lazy var  submitButton: UIButton = {
+        let button = UIButton(type : .system)
+        button.setTitle("Submit", for: .normal)
+        button.addTarget(self, action: #selector(handleSubmit), for: .touchUpInside)
+        return button
+    }()
+    
+    func handleSubmit() {
+        print("submitting...........")
+    }
     
     let inpuTextField: UITextField = {
         let tf = UITextField()
@@ -27,9 +37,12 @@ class CommentsController: UICollectionViewController  {
         super.viewDidLoad()
         navigationItem.title = "Comments"
         collectionView?.backgroundColor = UIColor.white
-        containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         containerView.addSubview(inpuTextField)
-        inpuTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        containerView.addSubview(submitButton)
+        inpuTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
+        
+        submitButton.anchor(top: containerView.topAnchor, left: nil, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 0)
     }
     
     override var inputAccessoryView: UIView? {
