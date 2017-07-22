@@ -9,10 +9,10 @@
 import UIKit
 import Firebase
 
-class CommentsController: UICollectionViewController  {
+class CommentsController: UICollectionViewController,UICollectionViewDelegateFlowLayout  {
    
     var post: Post?
-    
+    let cellId = "cell"
     let containerView: UIView = {
         let container = UIView()
         return container
@@ -56,6 +56,8 @@ class CommentsController: UICollectionViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Comments"
+        collectionView?.alwaysBounceVertical = true 
+        collectionView?.register(CommentCell.self ,forCellWithReuseIdentifier: cellId)
         collectionView?.backgroundColor = UIColor.white
         containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         containerView.addSubview(inpuTextField)
@@ -63,6 +65,21 @@ class CommentsController: UICollectionViewController  {
         inpuTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
         
         submitButton.anchor(top: containerView.topAnchor, left: nil, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 0)
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
+    }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CommentCell
+        return cell
     }
     
     override var inputAccessoryView: UIView? {

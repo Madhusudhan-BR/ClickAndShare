@@ -39,6 +39,8 @@
 		9B6962881F21D2C10078F9B2 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962871F21D2C10078F9B2 /* CustomTransition.swift */; };
 		9B69628A1F23148A0078F9B2 /* CustomDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962891F23148A0078F9B2 /* CustomDismissTransition.swift */; };
 		9B6962CB1F23330C0078F9B2 /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962CA1F23330C0078F9B2 /* CommentsController.swift */; };
+		9B6962CE1F239D6E0078F9B2 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962CD1F239D6E0078F9B2 /* CommentCell.swift */; };
+		9B6962D11F23AFD30078F9B2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962D01F23AFD30078F9B2 /* Comment.swift */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +104,8 @@
 		9B6962871F21D2C10078F9B2 /* CustomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
 		9B6962891F23148A0078F9B2 /* CustomDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDismissTransition.swift; sourceTree = "<group>"; };
 		9B6962CA1F23330C0078F9B2 /* CommentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
+		9B6962CD1F239D6E0078F9B2 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		9B6962D01F23AFD30078F9B2 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 			children = (
 				9B6962601F136C490078F9B2 /* User.swift */,
 				9B69626F1F1A75900078F9B2 /* Post.swift */,
+				9B6962D01F23AFD30078F9B2 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				9B6962781F1E3F700078F9B2 /* PhotoSelector */,
 				9B69627E1F1F8A3F0078F9B2 /* HomeFeed */,
 				9B6962811F1F8A950078F9B2 /* SearchFeed */,
+				9B6962CF1F239D720078F9B2 /* Comment */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -343,6 +349,14 @@
 			isa = PBXGroup;
 			children = (
 				9B6962CA1F23330C0078F9B2 /* CommentsController.swift */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		9B6962CF1F239D720078F9B2 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				9B6962CD1F239D6E0078F9B2 /* CommentCell.swift */,
 			);
 			name = Comment;
 			sourceTree = "<group>";
@@ -655,6 +669,7 @@
 				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
 				9B6962771F1E31EA0078F9B2 /* HomeController.swift in Sources */,
 				9B6962651F148B0D0078F9B2 /* LoginController.swift in Sources */,
+				9B6962CE1F239D6E0078F9B2 /* CommentCell.swift in Sources */,
 				9B69627A1F1E41050078F9B2 /* HomeFeedCell.swift in Sources */,
 				9B6962741F1DEE090078F9B2 /* CustomImageView.swift in Sources */,
 				9B6962611F136C490078F9B2 /* User.swift in Sources */,
@@ -666,6 +681,7 @@
 				9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */,
 				9B6962CB1F23330C0078F9B2 /* CommentsController.swift in Sources */,
 				9B69626E1F1A3E4D0078F9B2 /* ShareController.swift in Sources */,
+				9B6962D11F23AFD30078F9B2 /* Comment.swift in Sources */,
 				9B6962671F15CD960078F9B2 /* PhotoSelectorController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
