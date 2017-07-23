@@ -10,6 +10,7 @@ import UIKit
 
 protocol  HomeFeedDelegate {
     func loadCommentsController(post: Post)
+    func didTapLike(for cell: HomeFeedCell)
 }
 
 class HomeFeedCell: UICollectionViewCell {
@@ -17,6 +18,7 @@ class HomeFeedCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
+            likeButton.setImage(post?.hasLiked == true ? #imageLiteral(resourceName: "like_selected").withRenderingMode(.alwaysOriginal): #imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
             ImageView.loadImage(urlString: post?.imageUrl ?? "")
             usernameLabel.text = post?.user.username
             profileImageView.loadImage(urlString: post?.user.profileImageURL ?? "")
@@ -49,12 +51,17 @@ class HomeFeedCell: UICollectionViewCell {
         return options
     }()
    
-    let likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let options = UIButton(type: .system)
         options.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+        options.addTarget(self, action: #selector(handleLikes), for: .touchUpInside)
         options.setTitleColor(UIColor.black, for: .normal)
         return options
     }()
+    
+    func handleLikes(){
+        delegate?.didTapLike(for: self)
+    }
     
     lazy var commentButton: UIButton = {
         let options = UIButton(type: .system)

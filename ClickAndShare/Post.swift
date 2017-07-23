@@ -17,7 +17,7 @@ class  Post: NSObject {
     var date: Date
     var user: User
     var postId: String?
-    
+    var hasLiked = false 
     init(user: User,caption: String, imageHeight: CGFloat, imageWidth: CGFloat, imageUrl: String, creationDate: NSNumber, postId: String) {
         self.caption = caption
         self.imageHeight = imageHeight

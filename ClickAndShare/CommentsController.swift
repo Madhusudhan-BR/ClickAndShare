@@ -57,7 +57,8 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Comments"
-        collectionView?.alwaysBounceVertical = true 
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.keyboardDismissMode = .interactive
         collectionView?.register(CommentCell.self ,forCellWithReuseIdentifier: cellId)
         collectionView?.backgroundColor = UIColor.white
         containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
@@ -70,6 +71,8 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         submitButton.anchor(top: containerView.topAnchor, left: nil, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 60, height: 0)
         fetchComments()
     }
+    
+
     
     func fetchComments(){
         guard let  postId = self.post?.postId else {
@@ -110,6 +113,10 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
         let estimatedSize = dummycell.systemLayoutSizeFitting(targetSize)
         let height = max(60, estimatedSize.height)
         return CGSize(width: view.frame.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comments.count

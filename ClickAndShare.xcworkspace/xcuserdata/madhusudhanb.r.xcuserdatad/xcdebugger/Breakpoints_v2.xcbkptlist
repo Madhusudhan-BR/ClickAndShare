@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClickAndShare/HomeFeedCell.swift"
-            timestampString = "522400495.090051"
+            timestampString = "522515317.622602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "setupActionButtons()"
             landmarkType = "7">
          </BreakpointContent>
