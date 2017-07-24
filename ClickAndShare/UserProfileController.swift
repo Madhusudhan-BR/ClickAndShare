@@ -9,12 +9,13 @@
 import UIKit
 import Firebase
 
-class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout,UserProfileDelegate {
     
     var user: User?
     var userId: String?
     var currentUserID: String?
     var currentUserPosts = [Post]()
+    var isGrid = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +90,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! UserProfileHeader
         header.user = self.user
+        header.delegate = self
         return header
+    }
+    
+    func didTapList() {
+        isGrid = false
+    }
+    
+    func didTapGrid() {
+        isGrid = true    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

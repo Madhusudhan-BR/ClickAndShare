@@ -10,8 +10,13 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+protocol  UserProfileDelegate {
+    func didTapGrid()
+    func didTapList()
+}
+
 class UserProfileHeader: UICollectionViewCell {
-    
+    var delegate : UserProfileDelegate?
     var user : User? {
         didSet {
             //setupProfileImage()
@@ -115,6 +120,7 @@ class UserProfileHeader: UICollectionViewCell {
     func handleGrid() {
         gridButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
         listButton.tintColor = UIColor(white: 0, alpha: 0.1)
+        delegate?.didTapGrid()
     }
     
     lazy var listButton : UIButton = {
@@ -128,6 +134,7 @@ class UserProfileHeader: UICollectionViewCell {
     func handleList() {
         listButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
         gridButton.tintColor = UIColor(white: 0, alpha: 0.1)
+        delegate?.didTapList()
     }
     
     
