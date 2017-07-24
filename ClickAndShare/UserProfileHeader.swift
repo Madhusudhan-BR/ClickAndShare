@@ -32,7 +32,6 @@ class UserProfileHeader: UICollectionViewCell {
         }
         Database.database().reference().child("follow").child(currentLoggedinUserId).child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(self.user?.uid ?? "",self.user?.username ?? "")
-            print(snapshot.value)
             if let isFollowing = snapshot.value as? String, isFollowing == "1" {
                 self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
                 self.editProfileFollowButton.backgroundColor = UIColor.white
@@ -101,24 +100,35 @@ class UserProfileHeader: UICollectionViewCell {
     
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
-        
         iv.layer.cornerRadius = 40
         iv.layer.masksToBounds = true 
         return iv
     }()
     
-    let gridButton : UIButton = {
+    lazy var  gridButton : UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
+        button.addTarget(self, action: #selector(handleGrid), for: .touchUpInside)
         return button
     }()
     
-    let listButton : UIButton = {
+    func handleGrid() {
+        gridButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        listButton.tintColor = UIColor(white: 0, alpha: 0.1)
+    }
+    
+    lazy var listButton : UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "list"), for: .normal)
+        button.addTarget(self, action: #selector(handleList), for: .touchUpInside)
         button.tintColor = UIColor(white: 0, alpha: 0.1)
         return button
     }()
+    
+    func handleList() {
+        listButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        gridButton.tintColor = UIColor(white: 0, alpha: 0.1)
+    }
     
     
     let bookmarkButton : UIButton = {
