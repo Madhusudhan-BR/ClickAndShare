@@ -23,7 +23,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         fetchUser()
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: "cell")
-        
+        collectionView?.register(HomeFeedCell.self, forCellWithReuseIdentifier: "homecell")
         setupLogoutController()
         
         
@@ -96,10 +96,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     func didTapList() {
         isGrid = false
+        collectionView?.reloadData()
     }
     
     func didTapGrid() {
-        isGrid = true    
+        isGrid = true
+        collectionView?.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -115,15 +117,31 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCell
-        let post = self.currentUserPosts[indexPath.item]
-        cell.imageView.loadImage(urlString: post.imageUrl ?? "")
-        return cell
+        if isGrid {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCell
+            let post = self.currentUserPosts[indexPath.item]
+            cell.imageView.loadImage(urlString: post.imageUrl ?? "")
+            return cell
+        }else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homecell", for: indexPath) as! HomeFeedCell
+            let post = currentUserPosts[indexPath.row]
+            cell.post = post
+            return cell
+        }
+        
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.frame.width - 2) / 3
-        return CGSize(width: width, height: width)
+        if isGrid  {
+            let width = (view.frame.width - 2) / 3
+            return CGSize(width: width, height: width)
+        }
+        else{
+            var height:CGFloat = 56.0+50.0 + 50.0
+            height += view.frame.width
+            return CGSize(width: view.frame.width, height: height)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
