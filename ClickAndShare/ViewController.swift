@@ -25,16 +25,35 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let eulaButton : UIButton = {
         let button = UIButton(type: .system)
         
-        let attributedString = NSMutableAttributedString(string: "By clicking Sign up, you agree to our ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
-        attributedString.append(NSAttributedString(string: "Terms and conditions", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        let attributedString = NSMutableAttributedString(string: "By clicking signup,you agree to our ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
+        attributedString.append(NSAttributedString(string: "EULA", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
         
         button.setAttributedTitle(attributedString, for: .normal)
         button.addTarget(self, action: #selector(handleEULA), for: .touchUpInside)
         return button
     }()
     
-    func handleEULA() {
+    let EULATextField: UITextView = {
+        let tf = UITextView()
+        tf.isEditable = false
+        if let path = Bundle.main.path(forResource: "eula", ofType: "txt") {
+            do {
+                let data = try String(contentsOfFile: path, encoding: .utf8)
+                let myStrings = data.components(separatedBy: .newlines)
+                tf.text = myStrings.joined(separator: " \n ")
+            } catch {
+                print(error)
+            }
+        }
+        tf.backgroundColor = UIColor.white
+        tf.textAlignment = .center
+        tf.translatesAutoresizingMaskIntoConstraints = false
         
+        return tf
+    }()
+    
+    func handleEULA() {
+        setupSlideInView()
     }
     
     func handleToSignin() {
@@ -223,13 +242,67 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                      stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
                                      stackView.heightAnchor.constraint(equalToConstant: 200)
             ])
-        
-        
     }
     
     
     
+    //MARK: ALL EULA
+    
+    var blackView = UIView()
+    let verificationView : UIView = {
+        //let layout = UICollectionViewFlowLayout()
+        let view = UIView()
+        view.backgroundColor =  UIColor.white //UIColor(red: 244/255, green: 167/255, blue: 35/255, alpha: 1)
+        return view
+    }()
+    
+    func setupSlideInView() {
+        self.blackView = UIView()
+        blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(blackView)
+            window.addSubview(verificationView)
+            let height: CGFloat = 500
+            let y = window.frame.height - height
+            verificationView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
+            blackView.frame = view.frame
+            blackView.alpha = 0
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleBlackViewDismiss)))
+            
+            
+            self.verificationView.addSubview(EULATextField)
+            EULATextField.leftAnchor.constraint(equalTo: verificationView.leftAnchor, constant: 8).isActive = true
+            EULATextField.topAnchor.constraint(equalTo: verificationView.topAnchor, constant: 8).isActive = true
+            EULATextField.rightAnchor.constraint(equalTo: verificationView.rightAnchor, constant: -8).isActive = true
+            EULATextField.heightAnchor.constraint(equalToConstant: 500).isActive = true
+            
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.blackView.alpha = 1
+                self.verificationView.frame = CGRect(x: 0, y: y, width: self.verificationView.frame.width, height: self.verificationView.frame.height)
+                
+                
+            }, completion: nil)
+            
+            
+        }
+        
+    }
+    
+    func handleBlackViewDismiss() {
+        UIView.animate(withDuration: 0.5) {
+            
+            if let window = UIApplication.shared.keyWindow {
+                self.verificationView.frame = CGRect(x: 0, y: window.frame.height, width: self.verificationView.frame.width, height: self.verificationView.frame.height)
+            }
+            
+            self.blackView.alpha = 0
+        }
+    }
+ 
+
 }
+
 
 
 
