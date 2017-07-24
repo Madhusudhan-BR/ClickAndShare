@@ -203,6 +203,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         setupInput()
         view.addSubview(toSigninButton)
         toSigninButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+        
+        view.addSubview(eulaButton)
+        eulaButton.anchor(top: nil, left: view.leftAnchor, bottom: toSigninButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 50)
     }
     
     fileprivate func  setupInput() {
