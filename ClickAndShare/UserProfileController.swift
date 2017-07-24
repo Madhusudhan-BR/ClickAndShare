@@ -16,6 +16,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     var currentUserID: String?
     var currentUserPosts = [Post]()
     var isGrid = true
+    var isPagingDone = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,57 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         setupLogoutController()
         
         
+    }
+    
+    fileprivate func observePostsWithPaging(){
+        let postsRef = Database.database().reference().child("posts").child(currentUserID!)
+        var query = postsRef.queryOrdered(byChild: "creationDate")
+        
+        if currentUserPosts.count > 0 {
+            let value = currentUserPosts.last?.creationDate
+            query = query.queryEnding(atValue: value)
+        }
+        
+        query.queryLimited(toLast: 4).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard  var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            allObjects.reverse()
+            if allObjects.count < 4 {
+                self.isPagingDone = true
+            }
+            if self.currentUserPosts.count > 0 {
+                allObjects.removeFirst()
+            }
+            for object in allObjects {
+                guard let eachDict = object.value as? [String: Any] else { return }
+                guard let caption = eachDict["caption"] as? String else {
+                    return
+                }
+                guard let creationDate = eachDict["creationDate"] as? NSNumber else {
+                    return
+                }
+                guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
+                    return
+                }
+                guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
+                    return
+                }
+                guard let imageUrl = eachDict["imageUrl"] as? String else {
+                    return
+                }
+                guard let key = object.key as? String else { return }
+                
+                let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
+                print(post)
+                
+//                self.currentUserPosts.insert(post, at: 0)
+                self.currentUserPosts.append(post)
+                self.collectionView?.reloadData()
+
+            }
+           
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     fileprivate func observeMyPosts(){
@@ -117,6 +169,11 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == self.currentUserPosts.count-1 && !isPagingDone {
+            self.observePostsWithPaging()
+        }
+        
         if isGrid {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCell
             let post = self.currentUserPosts[indexPath.item]
@@ -163,8 +220,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             self.user = user
             self.navigationItem.title = user.username
-            self.observeMyPosts()
             self.collectionView?.reloadData()
+            self.observePostsWithPaging()
+
         }
         
         
