@@ -11,6 +11,7 @@ import UIKit
 protocol  HomeFeedDelegate {
     func loadCommentsController(post: Post)
     func didTapLike(for cell: HomeFeedCell)
+    func didTapOptions(post: Post)
 }
 
 class HomeFeedCell: UICollectionViewCell {
@@ -44,12 +45,20 @@ class HomeFeedCell: UICollectionViewCell {
         return iv
     }()
     
-    let optionsButton: UIButton = {
+    lazy var optionsButton: UIButton = {
         let options = UIButton(type: .system)
         options.setTitle("•••", for: .normal)
         options.setTitleColor(UIColor.black, for: .normal)
+        options.addTarget(self, action: #selector(handleOptions), for: .touchUpInside)
         return options
     }()
+    
+    func handleOptions() {
+        
+        guard let post = self.post else { return}
+        delegate?.didTapOptions(post: post)
+        
+    }
    
     lazy var likeButton: UIButton = {
         let options = UIButton(type: .system)

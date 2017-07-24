@@ -8,10 +8,10 @@
 
 import UIKit
 import Firebase
+import MessageUI
 
 
-
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeFeedDelegate{
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeFeedDelegate,  MFMailComposeViewControllerDelegate {
     
     let cellID = "cell"
     var Posts = [Post]()
@@ -181,5 +181,63 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.Posts[index.item] = post
             self.collectionView?.reloadItems(at: [index])
         }
+    }
+    
+    func didTapOptions(post: Post) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let reportAction = UIAlertAction(title: "Report", style: .destructive) { (_) in
+            var mailComposeVC = self.configureMailController(post: post)
+            if MFMailComposeViewController.canSendMail() {
+                self.present(mailComposeVC, animated: true, completion: nil)
+            } else {
+                self.showMailError()
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(reportAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func showMailError() {
+        createAlert(title: "Could not send mail", message: "Your device could not send an email to the developer")
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if error != nil {
+            return
+        }
+        controller.dismiss(animated: true, completion: nil)
+        switch  result {
+        case .sent:
+            createAlert(title: "Success", message: "The developer will look into the matter within 24 hours")
+            break
+        default : break
+        }
+        
+        //self.navigationController?.popViewController(animated: true)
+    }
+    
+    func configureMailController(post: Post) -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients(["brmadhusudhan@gmail.com"])
+        mailComposerVC.setSubject("Report Spam")
+        mailComposerVC.setMessageBody("Hi, I am experiencing spam from the user whose name is \(post.user.username) and UID is \(post.user.uid) with regard to the post \(post.postId). Please look into the matter. Thank you", isHTML: false)
+        return mailComposerVC
+    }
+    
+    
+    func createAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -22,6 +22,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return button
     }()
     
+    let eulaButton : UIButton = {
+        let button = UIButton(type: .system)
+        
+        let attributedString = NSMutableAttributedString(string: "By clicking Sign up, you agree to our ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
+        attributedString.append(NSAttributedString(string: "Terms and conditions", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.addTarget(self, action: #selector(handleEULA), for: .touchUpInside)
+        return button
+    }()
+    
+    func handleEULA() {
+        
+    }
     
     func handleToSignin() {
         navigationController?.popViewController(animated: true)
