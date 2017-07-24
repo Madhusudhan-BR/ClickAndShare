@@ -43,7 +43,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
             if index == 3 {
                 saveFeedack()
-                return false 
+                return false
             }
         }
         return true 
@@ -52,6 +52,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     func saveFeedack() {
         let label = UILabel()
         label.text = "Comming soon!"
+        label.textAlignment = .center
         label.textColor = UIColor.white
         label.backgroundColor = UIColor(white: 0, alpha: 0.2)
         view.addSubview(label)
