@@ -63,6 +63,7 @@ extension Database {
 }
 
 
+
 extension Date {
     func timeAgoDisplay() -> String {
         let secondsAgo = Int(Date().timeIntervalSince(self))

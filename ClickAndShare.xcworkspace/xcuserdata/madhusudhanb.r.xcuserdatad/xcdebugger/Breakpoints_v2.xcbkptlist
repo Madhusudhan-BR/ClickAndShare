@@ -275,5 +275,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClickAndShare/UserProfileController.swift"
+            timestampString = "522585033.906561"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "fetchUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClickAndShare.UserProfileController.((fetchUser in _DED8962228A86DFE04E0909E80A43165) () -&gt; ()).(closure #1).(closure #5)"
+                  moduleName = "ClickAndShare"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/madhusudhanb.r/Desktop/ios/ClickAndShare/ClickAndShare/UserProfileController.swift"
+                  timestampString = "522585673.905508"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
+                  offsetFromSymbolStart = "1615">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClickAndShare.UserProfileController.((fetchUser in _DED8962228A86DFE04E0909E80A43165) () -&gt; ()).(closure #1).(closure #5)"
+                  moduleName = "ClickAndShare"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/madhusudhanb.r/Desktop/ios/ClickAndShare/ClickAndShare/UserProfileController.swift"
+                  timestampString = "522585673.908353"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
+                  offsetFromSymbolStart = "2235">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

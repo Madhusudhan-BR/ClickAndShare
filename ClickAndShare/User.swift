@@ -13,6 +13,10 @@ class User : NSObject {
     let username: String
     let profileImageURL : String
     let uid: String
+    var followers : Int?
+
+    var following : Int?
+    var posts : Int?
     
     init(uid: String, dictionary : [String: Any]) {
         self.username = dictionary["username"] as? String ?? ""

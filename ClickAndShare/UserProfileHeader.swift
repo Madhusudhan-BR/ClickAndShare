@@ -26,6 +26,21 @@ class UserProfileHeader: UICollectionViewCell {
             setupEditProfileFolloeButton()
             self.profileImageView.loadImage(urlString: url)
             usernameLabel.text = user?.username
+            let attributedText = NSMutableAttributedString(string: "\(user?.posts == nil ? 0 : user!.posts!)\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "Posts", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
+            postsLabel.attributedText = attributedText
+            
+            let followingattributedText = NSMutableAttributedString(string: "\(user?.following == nil ? 0 : user!.following!)\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+            followingattributedText.append(NSAttributedString(string: "Following", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
+            followingLabel.attributedText = followingattributedText
+            
+            
+            let followersattributedText = NSMutableAttributedString(string: "\(user?.followers == nil ? 0 : user!.followers!)\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+            followersattributedText.append(NSAttributedString(string: "Followers", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
+            
+            followersLabel.attributedText = followersattributedText
+            
+            
         }
     }
     
@@ -67,7 +82,7 @@ class UserProfileHeader: UICollectionViewCell {
         let label = UILabel()
         
         
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "Posts", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
         
         label.attributedText = attributedText
@@ -79,7 +94,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followersLabel : UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "Followers", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
         
         label.attributedText = attributedText
@@ -92,7 +107,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followingLabel : UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "Following", attributes: [NSForegroundColorAttributeName : UIColor.lightGray , NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)]))
         
         label.attributedText = attributedText

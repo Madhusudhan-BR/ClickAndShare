@@ -81,38 +81,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
-    fileprivate func observeMyPosts(){
-        
-        let postsRef = Database.database().reference().child("posts").child(currentUserID!)
-        
-        postsRef.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
-            guard let eachDict = snapshot.value as? [String: Any] else { return }
-            guard let caption = eachDict["caption"] as? String else {
-                return
-            }
-            guard let creationDate = eachDict["creationDate"] as? NSNumber else {
-                return
-            }
-            guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
-                return
-            }
-            guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
-                return
-            }
-            guard let imageUrl = eachDict["imageUrl"] as? String else {
-                return
-            }
-            guard let key = snapshot.key as? String else { return }
-            
-            let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
-            print(post)
-            self.currentUserPosts.insert(post, at: 0)
-            // self.currentUserPosts.append(post)
-            self.collectionView?.reloadData()
-        }) { (error) in
-            print(error)
-        }
-    }
+//    fileprivate func observeMyPosts(){
+//        
+//        let postsRef = Database.database().reference().child("posts").child(currentUserID!)
+//        
+//        postsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//            self.numberOfPosts = Int(snapshot.childrenCount)
+//        }) { (error) in
+//            print(error)
+//        }
+//    }
     
     fileprivate func setupLogoutController() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal),  style: .plain, target: self, action: #selector(handleLogout))
@@ -218,6 +196,43 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         Database.fetchuserWithUid(uid: UID) { (user) in
             
             
+            Database.database().reference().child("follow").child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+                let  follwingCount = Int(snapshot.childrenCount)
+                user.following = follwingCount
+            }) { (error) in
+                print(error)
+                return
+            }
+            
+            let postsRef = Database.database().reference().child("posts").child(UID)
+            
+            postsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print(snapshot.childrenCount)
+                let numberOfPosts =  Int(snapshot.childrenCount)
+                user.posts = numberOfPosts
+            }) { (error) in
+                print(error)
+            }
+            var followersCount = 0
+            
+            Database.database().reference().child("follow").observeSingleEvent(of: .value, with: { (snapshot) in
+                //print(snapshot.value)
+                
+                guard let allDict = snapshot.value as? [String: Any] else { return }
+                for eachDict in allDict {
+                    if eachDict.key != UID {
+                        guard let dict = eachDict.value as? [String: Any] else { return }
+                        //print(dict["\(UID)"])
+                        if let value = dict["\(UID)"] as? String ,value == "1" {
+                            followersCount += 1
+                        }
+                     }
+                }
+                user.followers = followersCount
+            }) { (error) in
+                print(error)
+            }
+            
             self.user = user
             self.navigationItem.title = user.username
             self.collectionView?.reloadData()
@@ -228,5 +243,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         
     }
+
     
 }
