@@ -13,6 +13,7 @@ class UserProfileCell : UICollectionViewCell {
     let imageView: CustomImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 10
         iv.clipsToBounds  = true
         return iv
     }()

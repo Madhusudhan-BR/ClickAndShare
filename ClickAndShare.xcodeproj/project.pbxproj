@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		29B0C56862103499920D8D7A /* Pods_ClickAndShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF51CECF159202217624EE8 /* Pods_ClickAndShareTests.framework */; };
+		9B39E5A31F3335F400CF9907 /* clickmainbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B39E5A21F3335F400CF9907 /* clickmainbg.jpg */; };
+		9B39E5A51F333DE300CF9907 /* clickbg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B39E5A41F333DE300CF9907 /* clickbg2.jpg */; };
+		9B39E5A71F333E5500CF9907 /* clickbg3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B39E5A61F333E5500CF9907 /* clickbg3.jpg */; };
 		9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962201F1241A30078F9B2 /* AppDelegate.swift */; };
 		9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962221F1241A30078F9B2 /* ViewController.swift */; };
 		9B6962261F1241A30078F9B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962241F1241A30078F9B2 /* Main.storyboard */; };
@@ -17,7 +20,6 @@
 		9B6962391F1241A40078F9B2 /* ClickAndShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962381F1241A40078F9B2 /* ClickAndShareTests.swift */; };
 		9B6962441F1241A40078F9B2 /* ClickAndShareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */; };
 		9B6962531F124F2C0078F9B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962521F124F2C0078F9B2 /* Extensions.swift */; };
-		9B6962551F1257440078F9B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962541F1257440078F9B2 /* GoogleService-Info.plist */; };
 		9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */; };
 		9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962581F134FF10078F9B2 /* UserProfileController.swift */; };
 		9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B69625E1F1359F30078F9B2 /* UserProfileHeader.swift */; };
@@ -42,6 +44,11 @@
 		9B6962CE1F239D6E0078F9B2 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962CD1F239D6E0078F9B2 /* CommentCell.swift */; };
 		9B6962D11F23AFD30078F9B2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6962D01F23AFD30078F9B2 /* Comment.swift */; };
 		9B6962D31F260D920078F9B2 /* eula.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B6962D21F260D920078F9B2 /* eula.txt */; };
+		9BA9A4F41F29AB2E008E6FE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BA9A4F31F29AB2E008E6FE5 /* GoogleService-Info.plist */; };
+		9BA9A4FF1F3029C8008E6FE5 /* ThoughtShareVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA9A4FE1F3029C8008E6FE5 /* ThoughtShareVC.swift */; };
+		9BA9A5011F309C63008E6FE5 /* HomeFeedCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA9A5001F309C63008E6FE5 /* HomeFeedCell2.swift */; };
+		9BB876741F375DB80080CBCC /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB876731F375DB80080CBCC /* NavController.swift */; };
+		9BB876761F378F910080CBCC /* clickandshareicon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB876751F378F910080CBCC /* clickandshareicon120.png */; };
 		E3D938AE2C38C9E699F44262 /* Pods_ClickAndShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198EEC6C8BC02BD59083DD /* Pods_ClickAndShareUITests.framework */; };
 		F84103F47251211C256062AF /* Pods_ClickAndShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +75,9 @@
 		1104FEDFE2B8B76FB349B1B4 /* Pods-ClickAndShareTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareTests/Pods-ClickAndShareTests.debug.xcconfig"; sourceTree = "<group>"; };
 		49459F813996849FA9B77CDC /* Pods_ClickAndShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClickAndShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B0589AAC7861C61BEC5309B /* Pods-ClickAndShareUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B39E5A21F3335F400CF9907 /* clickmainbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clickmainbg.jpg; sourceTree = "<group>"; };
+		9B39E5A41F333DE300CF9907 /* clickbg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clickbg2.jpg; sourceTree = "<group>"; };
+		9B39E5A61F333E5500CF9907 /* clickbg3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clickbg3.jpg; sourceTree = "<group>"; };
 		9B69621D1F1241A30078F9B2 /* ClickAndShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickAndShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6962201F1241A30078F9B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B6962221F1241A30078F9B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +93,6 @@
 		9B6962431F1241A40078F9B2 /* ClickAndShareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickAndShareUITests.swift; sourceTree = "<group>"; };
 		9B6962451F1241A40078F9B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B6962521F124F2C0078F9B2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		9B6962541F1257440078F9B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9B6962581F134FF10078F9B2 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		9B69625E1F1359F30078F9B2 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
@@ -108,6 +117,12 @@
 		9B6962CD1F239D6E0078F9B2 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		9B6962D01F23AFD30078F9B2 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		9B6962D21F260D920078F9B2 /* eula.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eula.txt; sourceTree = "<group>"; };
+		9BA9A4F31F29AB2E008E6FE5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9BA9A4FD1F2AF6F5008E6FE5 /* ClickAndShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClickAndShare.entitlements; sourceTree = "<group>"; };
+		9BA9A4FE1F3029C8008E6FE5 /* ThoughtShareVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThoughtShareVC.swift; sourceTree = "<group>"; };
+		9BA9A5001F309C63008E6FE5 /* HomeFeedCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFeedCell2.swift; sourceTree = "<group>"; };
+		9BB876731F375DB80080CBCC /* NavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
+		9BB876751F378F910080CBCC /* clickandshareicon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clickandshareicon120.png; sourceTree = "<group>"; };
 		B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B08BEBE42413AAC8A37808 /* Pods-ClickAndShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShareUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShareUITests/Pods-ClickAndShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClickAndShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClickAndShare/Pods-ClickAndShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +196,7 @@
 		9B69621F1F1241A30078F9B2 /* ClickAndShare */ = {
 			isa = PBXGroup;
 			children = (
+				9BA9A4FD1F2AF6F5008E6FE5 /* ClickAndShare.entitlements */,
 				9B69625D1F1359750078F9B2 /* Supporting Files */,
 				9B69625C1F1359690078F9B2 /* Model */,
 				9B69625B1F13595E0078F9B2 /* View */,
@@ -226,6 +242,8 @@
 				9B69627B1F1F81C10078F9B2 /* Tab bar Controllers */,
 				9B6962841F20BB800078F9B2 /* Camera */,
 				9B6962CC1F23334A0078F9B2 /* Comment */,
+				9BA9A4FE1F3029C8008E6FE5 /* ThoughtShareVC.swift */,
+				9BB876731F375DB80080CBCC /* NavController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -252,10 +270,13 @@
 		9B69625D1F1359750078F9B2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9BA9A4F31F29AB2E008E6FE5 /* GoogleService-Info.plist */,
 				9B69622F1F1241A30078F9B2 /* Info.plist */,
-				9B6962541F1257440078F9B2 /* GoogleService-Info.plist */,
 				9B6962201F1241A30078F9B2 /* AppDelegate.swift */,
+				9B39E5A61F333E5500CF9907 /* clickbg3.jpg */,
 				9B69622A1F1241A30078F9B2 /* Assets.xcassets */,
+				9BB876751F378F910080CBCC /* clickandshareicon120.png */,
+				9B39E5A21F3335F400CF9907 /* clickmainbg.jpg */,
 				9B6962D21F260D920078F9B2 /* eula.txt */,
 			);
 			name = "Supporting Files";
@@ -314,6 +335,7 @@
 			children = (
 				9B6962561F134F9A0078F9B2 /* MainTabBarController.swift */,
 				9B6962761F1E31EA0078F9B2 /* HomeController.swift */,
+				9B39E5A41F333DE300CF9907 /* clickbg2.jpg */,
 				9B6962661F15CD960078F9B2 /* PhotoSelectorController.swift */,
 				9B6962581F134FF10078F9B2 /* UserProfileController.swift */,
 				9B69627C1F1F81DB0078F9B2 /* SearchController.swift */,
@@ -325,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6962791F1E41050078F9B2 /* HomeFeedCell.swift */,
+				9BA9A5001F309C63008E6FE5 /* HomeFeedCell2.swift */,
 			);
 			name = HomeFeed;
 			sourceTree = "<group>";
@@ -451,8 +474,13 @@
 				TargetAttributes = {
 					9B69621C1F1241A30078F9B2 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = LXKYY3Z6TA;
+						DevelopmentTeam = LMAKNJ77KL;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					9B6962331F1241A40078F9B2 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -493,11 +521,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB876761F378F910080CBCC /* clickandshareicon120.png in Resources */,
 				9B69622E1F1241A30078F9B2 /* LaunchScreen.storyboard in Resources */,
-				9B6962551F1257440078F9B2 /* GoogleService-Info.plist in Resources */,
 				9B69622B1F1241A30078F9B2 /* Assets.xcassets in Resources */,
+				9B39E5A31F3335F400CF9907 /* clickmainbg.jpg in Resources */,
+				9BA9A4F41F29AB2E008E6FE5 /* GoogleService-Info.plist in Resources */,
 				9B6962261F1241A30078F9B2 /* Main.storyboard in Resources */,
+				9B39E5A71F333E5500CF9907 /* clickbg3.jpg in Resources */,
 				9B6962D31F260D920078F9B2 /* eula.txt in Resources */,
+				9B39E5A51F333DE300CF9907 /* clickbg2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,9 +697,11 @@
 				9B6962721F1DB6B80078F9B2 /* UserProfileCell.swift in Sources */,
 				9B69627D1F1F81DB0078F9B2 /* SearchController.swift in Sources */,
 				9B6962691F15E6530078F9B2 /* PhotoSelectorCell.swift in Sources */,
+				9BB876741F375DB80080CBCC /* NavController.swift in Sources */,
 				9B6962291F1241A30078F9B2 /* ClickAndShare.xcdatamodeld in Sources */,
 				9B69625F1F1359F30078F9B2 /* UserProfileHeader.swift in Sources */,
 				9B6962231F1241A30078F9B2 /* ViewController.swift in Sources */,
+				9BA9A5011F309C63008E6FE5 /* HomeFeedCell2.swift in Sources */,
 				9B6962701F1A75900078F9B2 /* Post.swift in Sources */,
 				9B6962831F20BB790078F9B2 /* CameraController.swift in Sources */,
 				9B6962591F134FF10078F9B2 /* UserProfileController.swift in Sources */,
@@ -678,6 +712,7 @@
 				9B6962741F1DEE090078F9B2 /* CustomImageView.swift in Sources */,
 				9B6962611F136C490078F9B2 /* User.swift in Sources */,
 				9B6962861F21A9250078F9B2 /* PreviewPhotoContainerView.swift in Sources */,
+				9BA9A4FF1F3029C8008E6FE5 /* ThoughtShareVC.swift in Sources */,
 				9B6962571F134F9A0078F9B2 /* MainTabBarController.swift in Sources */,
 				9B69628A1F23148A0078F9B2 /* CustomDismissTransition.swift in Sources */,
 				9B6962211F1241A30078F9B2 /* AppDelegate.swift in Sources */,
@@ -763,6 +798,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -814,6 +850,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -841,12 +878,16 @@
 			baseConfigurationReference = B7975A9D9CD5DE20B8FBD400 /* Pods-ClickAndShare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LXKYY3Z6TA;
+				CODE_SIGN_ENTITLEMENTS = ClickAndShare/ClickAndShare.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LMAKNJ77KL;
 				INFOPLIST_FILE = ClickAndShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -856,12 +897,16 @@
 			baseConfigurationReference = C473CB6D2436D98FF04F4BAE /* Pods-ClickAndShare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LXKYY3Z6TA;
+				CODE_SIGN_ENTITLEMENTS = ClickAndShare/ClickAndShare.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LMAKNJ77KL;
 				INFOPLIST_FILE = ClickAndShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madhusudhanbr.ClickAndShare2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

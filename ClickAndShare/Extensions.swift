@@ -7,7 +7,11 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
+
+let redColor  = UIColor(red: 255/255, green: 50/255, blue: 75/255, alpha: 1)
+let greenColor  = UIColor(red: 30/255, green: 244/255, blue: 125/255, alpha: 1)
+
 
 extension UIColor {
     static func rgb(red: CGFloat, green:CGFloat , blue:CGFloat ) -> UIColor {
@@ -100,3 +104,5 @@ extension Date {
         
 }
 }
+
+

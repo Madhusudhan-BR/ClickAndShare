@@ -19,9 +19,11 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
     
     lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
+      
+        
         sb.placeholder = "Enter search text"
         sb.delegate = self
-        UITextField.appearance(whenContainedInInstancesOf:[UISearchBar.self]).backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
+        UITextField.appearance(whenContainedInInstancesOf:[UISearchBar.self]).backgroundColor = .white //UIColor.rgb(red: 230, green: 230, blue: 230)
         return sb
     }()
     
@@ -30,6 +32,12 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
             return user.username.lowercased().contains(searchText.lowercased())
             
         })
+        
+        if searchText.isEmpty {
+            
+            filteredUsers = users 
+        }
+        
         collectionView?.reloadData()
     }
     
@@ -47,7 +55,7 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         searchBar.isHidden = false
     }
     
@@ -107,12 +115,22 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
                 if key == Auth.auth().currentUser?.uid {
                     return
                 }
-                let user = User(uid: key, dictionary: dict)
-                self.users.append(user)
+                
+                if self.checkIfUserIsBlocked(userID: key) {
+                    let user = User(uid: key, dictionary: dict)
+                    self.users.append(user)
+                }
+                
+
+                
+                
+                
+                
                 self.users.sort(by: { (user1, user2) -> Bool in
                     return user1.username.compare(user2.username) == .orderedAscending
                 })
             })
+            self.filteredUsers = self.users
             self.collectionView?.reloadData()
         }) { (error) in
             print(error)
@@ -120,5 +138,23 @@ class SearchController : UICollectionViewController,UICollectionViewDelegateFlow
         }
     }
     
-    
+    func checkIfUserIsBlocked(userID: String) -> Bool {
+        let defaults = UserDefaults.standard
+        // var blockedList = [User]()
+        
+        if let  blockedList = defaults.object(forKey: "blockedUsersID") as? [String] {
+            for blockedUser in blockedList {
+                if userID == blockedUser{
+                    print("returned false")
+                    return false
+                }
+                else {
+                    return true
+                }
+            }
+            
+        }
+        return true
+    }
+ 
 }

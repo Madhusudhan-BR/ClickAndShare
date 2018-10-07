@@ -16,6 +16,7 @@ class CommentsController: UICollectionViewController,UICollectionViewDelegateFlo
     let cellId = "cell"
     let containerView: UIView = {
         let container = UIView()
+        container.backgroundColor = UIColor.white
         return container
     }()
     

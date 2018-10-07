@@ -10,20 +10,87 @@ import UIKit
 import CoreData
 import  Firebase
 
+
+let appdelegate = UIApplication.shared.delegate as! AppDelegate
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var backgroundImageView = UIImageView()
+    var errorViewShowing = false
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true 
         window = UIWindow()
-        window?.rootViewController = MainTabBarController() 
+//        backgroundImageView.image = UIImage(named: "clickmainbg.jpg")
+//        backgroundImageView.frame = CGRect(x: 0, y: 0, width: window!.bounds.height * 1.668, height: window!.bounds.height)
+//        self.window?.addSubview(backgroundImageView)
+//        moveLeft()
+        window?.rootViewController = MainTabBarController()
+        
+        
         return true
     }
+    
+    
+    func infoView(message: String, color: UIColor){
+        if errorViewShowing == false {
+            errorViewShowing = true
+            let height = self.window!.bounds.height / 14.2
+            let errorView = UIView(frame: CGRect(x: 0, y: -height , width: self.window!.bounds.width, height: height))
+            errorView.backgroundColor = color
+            self.window?.addSubview(errorView)
+            
+            let errorLabel = UILabel()
+            errorLabel.numberOfLines = 0
+            errorLabel.text = message
+            errorLabel.textColor = UIColor.white
+            
+            errorView.addSubview(errorLabel)
+            errorLabel.frame.size.width = errorView.bounds.width
+            errorLabel.frame.size.height = errorView.bounds.height + UIApplication.shared.statusBarFrame.height/2
+            errorLabel.font = UIFont(name: "HelveticaNeue", size: 11)
+            errorLabel.textAlignment = .center
+            
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                errorView.frame.origin.y = 0
+            }, completion: { (done) in
+                
+                
+                UIView.animate(withDuration: 0.2, delay: 2, options: .curveEaseOut, animations: {
+                    
+                    errorView.frame.origin.y = -height
+                }, completion: { (done2) in
+                    errorView.removeFromSuperview()
+                    errorLabel.removeFromSuperview()
+                    self.errorViewShowing = false
+                })
+            })
+        }
+        
+    }
+    
+//    func moveLeft(){
+//        UIView.animate(withDuration: 20, animations: {
+//            self.backgroundImageView.frame.origin.x = -self.backgroundImageView.frame.width + self.window!.bounds.width
+//        }) { (completed) in
+//            self.moveRight()
+//        }
+//    }
+//    
+//    
+//    func moveRight(){
+//        UIView.animate(withDuration: 20, animations: {
+//            self.backgroundImageView.frame.origin.x = 0
+//        }) { (completed) in
+//            self.moveLeft()
+//        }
+//    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

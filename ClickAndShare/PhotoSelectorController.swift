@@ -18,25 +18,25 @@ class PhotoSelectorController : UICollectionViewController, UICollectionViewDele
     var selectedImage : UIImage?
     var assets = [PHAsset]()
     //var nextButtonTapped = false
+//    
+//    var CIFilterNames = [
+//        
+//        "CISepiaTone"
+//    ]
     
-    var CIFilterNames = [
-        
-        "CISepiaTone"
-    ]
+//    let imageToFilter : UIImageView = {
+//       let iv = UIImageView()
+//       // iv.backgroundColor = UIColor.orange
+//        
+//        return iv
+//    }()
     
-    let imageToFilter : UIImageView = {
-       let iv = UIImageView()
-       // iv.backgroundColor = UIColor.orange
-        
-        return iv
-    }()
-    
-    let scrollView : UIScrollView = {
-        let sv = UIScrollView()
-      sv.backgroundColor = UIColor.yellow
-        return sv
-    }()
-    
+//    let scrollView : UIScrollView = {
+//        let sv = UIScrollView()
+//      sv.backgroundColor = UIColor.yellow
+//        return sv
+//    }()
+//    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()

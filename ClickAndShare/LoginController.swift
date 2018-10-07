@@ -9,22 +9,23 @@
 import UIKit
 import FirebaseAuth
 
+let blueColor = UIColor(red: 45/255, green: 213/255, blue: 255/255, alpha: 1)
+
 class LoginController : UIViewController {
     
     
     
     let logoView : UIView = {
         let view = UIView()
-        
+        view.backgroundColor = blueColor
         let imageView = UIImageView()
-        imageView.image = UIImage(named : "Instagram_logo_white")
+        imageView.image = UIImage(named : "Asset3")
         imageView.contentMode = .scaleToFill
         view.addSubview(imageView)
         imageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 50)
         imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        view.backgroundColor = UIColor.rgb(red: 0, green: 120, blue: 155)
         return view
     }()
     
@@ -53,7 +54,8 @@ class LoginController : UIViewController {
     let loginButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.backgroundColor = blueColor //UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.alpha = 0.4
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
         button.setTitleColor(.white, for: .normal)
@@ -62,17 +64,25 @@ class LoginController : UIViewController {
         return button
     }()
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     func handleLoginButton(){
         
-        guard  let email = emailTextField.text, email.characters.count > 0  ,  let password = passwordTextField.text , password.characters.count > 0 else {
+        guard  let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), email.characters.count > 0  ,  let password = passwordTextField.text , password.characters.count > 0 else {
             return
         }
         
+        view.endEditing(true)
         Auth.auth().signIn(withEmail: email , password: password) { (user, error) in
             if let error = error {
                 print(error)
+                appdelegate.infoView(message: error.localizedDescription, color: redColor)
+                return 
             }
             print("Madhu: Succeess login ")
+            appdelegate.infoView(message: "Logged In", color: greenColor)
             guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {
                 return
             }
@@ -88,11 +98,12 @@ class LoginController : UIViewController {
         
         if isFormValid{
             loginButton.isEnabled = true
-            loginButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            loginButton.backgroundColor = blueColor//UIColor.rgb(red: 17, green: 154, blue: 237)
+            loginButton.alpha = 1
         }else {
             loginButton.isEnabled = false
-            loginButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
-            
+            loginButton.backgroundColor = blueColor //UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+            loginButton.alpha = 0.4
         }
     }
     

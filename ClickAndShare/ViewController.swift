@@ -15,18 +15,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let button = UIButton(type: .system)
         
         let attributedString = NSMutableAttributedString(string: "Have an account already? ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
-        attributedString.append(NSAttributedString(string: "Sign In", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        attributedString.append(NSAttributedString(string: "Sign In", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : blueColor]))
         
         button.setAttributedTitle(attributedString, for: .normal)
         button.addTarget(self, action: #selector(handleToSignin), for: .touchUpInside)
         return button
     }()
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     let eulaButton : UIButton = {
         let button = UIButton(type: .system)
         
-        let attributedString = NSMutableAttributedString(string: "By clicking signup,you agree to our ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.lightGray])
-        attributedString.append(NSAttributedString(string: "EULA", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        let attributedString = NSMutableAttributedString(string: "Click here to View EULA. By SigningUp,you agree to our ", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 12) , NSForegroundColorAttributeName : UIColor.lightGray])
+        attributedString.append(NSAttributedString(string: "EULA", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14) , NSForegroundColorAttributeName : blueColor]))
         
         button.setAttributedTitle(attributedString, for: .normal)
         button.addTarget(self, action: #selector(handleEULA), for: .touchUpInside)
@@ -106,11 +110,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if isFormValid{
             signupButton.isEnabled = true
-            signupButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            signupButton.backgroundColor = blueColor//UIColor.rgb(red: 17, green: 154, blue: 237)
+            signupButton.alpha = 1
         }else {
             signupButton.isEnabled = false
-            signupButton.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
-
+            signupButton.backgroundColor = blueColor//UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+            signupButton.alpha = 0.4
         }
     }
     
@@ -138,7 +143,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let signupButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign up", for: .normal)
-        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.alpha = 0.4
+        button.backgroundColor = blueColor //UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
         button.setTitleColor(.white, for: .normal)
@@ -149,13 +155,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func handleSignupButton(){
         
-        guard  let email = emailTextField.text, email.characters.count > 0  , let username = usernameTextField.text ,username.characters.count > 0 ,  let password = passwordTextField.text , password.characters.count > 0 else {
+        guard  let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), email.characters.count > 0  , let username = usernameTextField.text ,username.characters.count > 0 ,  let password = passwordTextField.text , password.characters.count > 0 else {
             return
         }
-        
+        view.endEditing(true)
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error.debugDescription)
+                appdelegate.infoView(message: error.debugDescription, color: redColor)
                 return
             }
             
@@ -198,7 +205,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
             })
             print("MADHU : Successfully created user \(username)")
-            
+            appdelegate.infoView(message: "Successfully registered", color: greenColor)
             guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {
                 return
             }
@@ -212,7 +219,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         view.addSubview(addPhotoButton)
-        view.backgroundColor = .white 
+        view.backgroundColor = UIColor.white
         addPhotoButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
         addPhotoButton.heightAnchor.constraint(equalToConstant: 140).isActive = true
         addPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

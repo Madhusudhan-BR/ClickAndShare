@@ -9,25 +9,43 @@
 import UIKit
 import Firebase
 
+
+
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout,UserProfileDelegate {
     
     var user: User?
     var userId: String?
     var currentUserID: String?
     var currentUserPosts = [Post]()
-    var isGrid = true
+    var onlyPicPosts = [Post]()
+    var isGrid = false
     var isPagingDone = false
+    var count = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        fetchUser()
+        
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView?.register(HomeFeedCell2.self, forCellWithReuseIdentifier: "homecell2")
         collectionView?.register(HomeFeedCell.self, forCellWithReuseIdentifier: "homecell")
         setupLogoutController()
         
+        let refreshControl = UIRefreshControl()
+        collectionView?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+
         
+        fetchUser()
+        
+    }
+    
+    func handleRefresh(){
+        currentUserPosts.removeAll()
+        onlyPicPosts.removeAll()
+        fetchUser()
     }
     
     fileprivate func observePostsWithPaging(){
@@ -41,13 +59,19 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         query.queryLimited(toLast: 4).observeSingleEvent(of: .value, with: { (snapshot) in
             guard  var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            //print("Print from function", snapshot.childrenCount)
+            print("Print from function", allObjects.count)
             allObjects.reverse()
+            
             if allObjects.count < 4 {
                 self.isPagingDone = true
             }
-            if self.currentUserPosts.count > 0 {
+            
+            if self.currentUserPosts.count > 0 && allObjects.count > 0  {
                 allObjects.removeFirst()
             }
+            
+            
             for object in allObjects {
                 guard let eachDict = object.value as? [String: Any] else { return }
                 guard let caption = eachDict["caption"] as? String else {
@@ -69,31 +93,100 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
                 
                 let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
                 print(post)
-                
+                print("key",object.key)
 //                self.currentUserPosts.insert(post, at: 0)
                 self.currentUserPosts.append(post)
-                self.collectionView?.reloadData()
+                
 
             }
-           
+            
+           self.collectionView?.reloadData()
         }) { (error) in
             print(error.localizedDescription)
         }
     }
     
-//    fileprivate func observeMyPosts(){
-//        
-//        let postsRef = Database.database().reference().child("posts").child(currentUserID!)
-//        
-//        postsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//            self.numberOfPosts = Int(snapshot.childrenCount)
-//        }) { (error) in
-//            print(error)
+    fileprivate func observeMyPosts(){
+        print("Start paging for more posts")
+        
+        guard let uid = self.user?.uid else { return }
+        let ref = Database.database().reference().child("posts").child(uid)
+        
+        var query = ref.queryOrdered(byChild: "creationDate")
+        
+//        if currentUserPosts.count > 0 {
+//            //            let value = posts.last?.id
+//            let value = currentUserPosts.last?.creationDate
+//            query = query.queryEnding(atValue: value)
 //        }
-//    }
+        
+        currentUserPosts.removeAll()
+        onlyPicPosts.removeAll()
+        
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            
+            allObjects.reverse()
+            
+//            if allObjects.count < 4 {
+//                self.isPagingDone = true
+//            }
+//            
+//            if self.currentUserPosts.count > 0 && allObjects.count > 0 {
+//                allObjects.removeFirst()
+//            }
+            
+            guard let user = self.user else { return }
+            
+            allObjects.forEach({ (object) in
+                
+                guard let eachDict = object.value as? [String: Any] else { return }
+                guard let caption = eachDict["caption"] as? String else {
+                    return
+                }
+                guard let creationDate = eachDict["creationDate"] as? NSNumber else {
+                    return
+                }
+                guard let imageHeight = eachDict["imageHeight"] as? CGFloat else {
+                    return
+                }
+                guard let imageWidth = eachDict["imageWidth"] as? CGFloat else {
+                    return
+                }
+                guard let imageUrl = eachDict["imageUrl"] as? String else {
+                    return
+                }
+                guard let key = object.key as? String else { return }
+                
+                let post = Post(user: self.user!,caption: caption, imageHeight: imageHeight , imageWidth: imageWidth, imageUrl: imageUrl, creationDate: creationDate, postId: key)
+                
+                self.currentUserPosts.append(post)
+                
+                //                print(snapshot.key)
+            })
+            
+            self.currentUserPosts.forEach({ (post) in
+                if post.imageUrl == "none"{
+                    self.count += 1
+                } else {
+                
+                    self.onlyPicPosts.append(post)
+                }
+            })
+            
+            self.collectionView?.refreshControl?.endRefreshing()
+            
+            self.collectionView?.reloadData()
+            
+            
+        }) { (err) in
+            print("Failed to paginate for posts:", err)
+        }
+    }
     
     fileprivate func setupLogoutController() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal),  style: .plain, target: self, action: #selector(handleLogout))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").imageColor(color: UIColor.white).withRenderingMode(.alwaysOriginal),  style: .plain, target: self, action: #selector(handleLogout))
     }
     
     func handleLogout(){
@@ -112,8 +205,39 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        guard let UID = self.userId ?? (Auth.auth().currentUser?.uid ) else { return }
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        if UID != currentUserId {
+            alertController.addAction(UIAlertAction(title: "Block User", style: .destructive, handler: { (_) in
+                
+                let alert = UIAlertController(title: "Block", message: "Are you sure you want to block this user? If you block this user you can never see this user profile or posts", preferredStyle: .alert)
+                let yesAction = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+                    
+                    
+                    
+                    blockedUsers.append(UID)
+
+                    UserDefaults.standard.set(blockedUsers, forKey: "blockedUsersID")
+                    
+                    appdelegate.infoView(message: "Successfully blocked user. Refresh the application. ", color: greenColor)
+                })
+                let noAction = UIAlertAction(title: "No" ,style: .cancel, handler: nil)
+                alert.addAction(yesAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
+
+                
+            })
+        )}
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.popoverPresentationController?.sourceView = self.view
+        alertController.popoverPresentationController?.permittedArrowDirections = []
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX , y: self.view.bounds.midY , width: 0  , height: 0)
+        
+
         present(alertController, animated: true, completion: nil)
     }
     
@@ -143,28 +267,49 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentUserPosts.count
+        if isGrid {
+            return onlyPicPosts.count
+        } else {
+            return currentUserPosts.count
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == self.currentUserPosts.count-1 && !isPagingDone {
-            self.observePostsWithPaging()
-        }
+        //        if indexPath.item == self.currentUserPosts.count-1 && isPagingDone == false{
+        //            self.observeMyPosts()
+        //        }
         
         if isGrid {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCell
-            let post = self.currentUserPosts[indexPath.item]
+            let post = self.onlyPicPosts[indexPath.item]
             cell.imageView.loadImage(urlString: post.imageUrl ?? "")
+            
             return cell
         }else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homecell", for: indexPath) as! HomeFeedCell
             let post = currentUserPosts[indexPath.row]
-            cell.post = post
-            return cell
+            if post.imageUrl == "none" {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homecell2", for: indexPath) as! HomeFeedCell2
+                
+                cell.post = post
+                cell.stackView?.isHidden = true
+                cell.numofLikesLabel.isHidden = true
+                cell.numofCommentsLabel.isHidden = true
+                return cell
+                
+            }else {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homecell", for: indexPath) as! HomeFeedCell
+                
+                cell.post = post
+                cell.stackView?.isHidden = true
+                cell.numofLikesLabel.isHidden = true
+                cell.numofCommentsLabel.isHidden = true
+                return cell
+                
+            }
         }
         
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -173,9 +318,17 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             return CGSize(width: width, height: width)
         }
         else{
-            var height:CGFloat = 56.0+50.0 + 50.0
-            height += view.frame.width
-            return CGSize(width: view.frame.width, height: height)
+            var post = currentUserPosts[indexPath.item]
+            if post.imageUrl == "none" {
+                var height:CGFloat = 56.0+50.0 + 50.0
+                return CGSize(width: view.frame.width, height: height)
+                
+            } else {
+                var height:CGFloat = 56.0+50.0 + 50.0
+                height += view.frame.width
+                return CGSize(width: view.frame.width, height: height)
+                
+            }
         }
     }
     
@@ -188,9 +341,10 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     fileprivate func fetchUser(){
-
+//        guard let selfuid = self.userId else { return }
+//        guard let current_user = Auth.auth().currentUser?.uid else { return }
         
-        let UID = self.userId ?? Auth.auth().currentUser?.uid ?? ""
+        guard let UID = self.userId ?? (Auth.auth().currentUser?.uid ) else { return }
         self.currentUserID = UID
         
         Database.fetchuserWithUid(uid: UID) { (user) in
@@ -222,27 +376,69 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
                 for eachDict in allDict {
                     if eachDict.key != UID {
                         guard let dict = eachDict.value as? [String: Any] else { return }
-                        //print(dict["\(UID)"])
+                        print(UID,dict["\(UID)"])
                         if let value = dict["\(UID)"] as? String ,value == "1" {
                             followersCount += 1
                         }
                      }
                 }
-                user.followers = followersCount
+//                user.followers = followersCount
+//                self.user = user
+//                self.navigationItem.title = user.username
+//                DispatchQueue.main.async {
+//                self.collectionView?.reloadData()    
+//                }
+                
+                self.observeMyPosts()
             }) { (error) in
                 print(error)
             }
             
+            user.followers = followersCount
             self.user = user
             self.navigationItem.title = user.username
-            self.collectionView?.reloadData()
-            self.observePostsWithPaging()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+          
 
         }
         
         
         
     }
-
     
+    func didTapBookmark() {
+        saveFeedack()
+    }
+    
+    func didTapEditProfileButton() {
+        saveFeedack()
+    }
+    
+    func saveFeedack() {
+        let label = UILabel()
+        label.text = "Comming soon!"
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        view.addSubview(label)
+        label.frame = CGRect(x: 0, y: 0, width: 150, height: 80)
+        label.center = view.center
+        
+        label.layer.transform = CATransform3DMakeScale(0, 0, 0)
+        label.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            label.layer.transform = CATransform3DMakeScale(1, 1, 1)
+            label.alpha = 1
+        }, completion: { (completed) in
+            UIView.animate(withDuration: 0.5, delay: 0.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+                label.alpha = 1
+            }, completion: { (_) in
+                label.removeFromSuperview()
+            })
+        })
+        
+    }
 }

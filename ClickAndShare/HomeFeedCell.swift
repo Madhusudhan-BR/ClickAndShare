@@ -19,27 +19,35 @@ class HomeFeedCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
-            likeButton.setImage(post?.hasLiked == true ? #imageLiteral(resourceName: "like_selected").withRenderingMode(.alwaysOriginal): #imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+            likeButton.setImage(post?.hasLiked == true ? #imageLiteral(resourceName: "like_selected").imageColor(color: blueColor).withRenderingMode(.alwaysOriginal): #imageLiteral(resourceName: "like_unselected").imageColor(color: blueColor).withRenderingMode(.alwaysOriginal), for: .normal)
             ImageView.loadImage(urlString: post?.imageUrl ?? "")
             usernameLabel.text = post?.user.username
             profileImageView.loadImage(urlString: post?.user.profileImageURL ?? "")
             setupAttributedText()
+            numofLikesLabel.text = "•\(post!.numofLikes) Likes"
+            numofCommentsLabel.text = "•\(post!.numofComments) Comments  • \(post!.date.timeAgoDisplay())"
         }
     }
     
     func setupAttributedText(){
-        let attributedText = NSMutableAttributedString(string: "\(String(describing: post!.user.username))", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "  \(post!.caption!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
-        attributedText.append(NSAttributedString(string: "\n\(String(describing: post!.date.timeAgoDisplay()))", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray]))
+        let attributedText = NSMutableAttributedString(string: "", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "\(post!.caption!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
         
         captionLabel.attributedText = attributedText
-
+        
+            let timeText = NSAttributedString(string: "\n\(String(describing: post!.date.timeAgoDisplay()))", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.lightGray])
+        
+        
+        
     }
+    
+   
+    
     
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
         
-        iv.layer.cornerRadius = 20
+        iv.layer.cornerRadius = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -74,7 +82,7 @@ class HomeFeedCell: UICollectionViewCell {
     
     lazy var commentButton: UIButton = {
         let options = UIButton(type: .system)
-        options.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
+        options.setImage(#imageLiteral(resourceName: "comment").imageColor(color: blueColor).withRenderingMode(.alwaysOriginal), for: .normal)
         options.addTarget(self, action: #selector(handleComments), for: .touchUpInside)
         options.setTitleColor(UIColor.black, for: .normal)
         return options
@@ -91,9 +99,27 @@ class HomeFeedCell: UICollectionViewCell {
     var usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = blueColor
         label.text = "Username"
         return label
     }()
+    
+    var numofLikesLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "3 likes"
+        label.textColor = UIColor.lightGray
+        return label
+    }()
+
+    var numofCommentsLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.lightGray
+        label.text = "4 comments"
+        return label
+    }()
+
     
     let captionLabel: UILabel = {
         let label = UILabel()
@@ -104,10 +130,13 @@ class HomeFeedCell: UICollectionViewCell {
     
     let ImageView : CustomImageView = {
         let iv = CustomImageView()
+        iv.layer.cornerRadius = 6
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
+    
+    var likesCommentsStackView: UIStackView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -117,13 +146,41 @@ class HomeFeedCell: UICollectionViewCell {
         addSubview(optionsButton)
         addSubview(profileImageView)
         addSubview(captionLabel)
-        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: ImageView.topAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 40, height: 40)
-        optionsButton.anchor(top: topAnchor, left: usernameLabel.rightAnchor, bottom: ImageView.topAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: -8, paddingRight: 8, width: 44, height: 0)
-        usernameLabel.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: ImageView.topAnchor, right: optionsButton.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 0, height: 0)
-        ImageView.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        ImageView.heightAnchor.constraint(equalTo: ImageView.widthAnchor, multiplier: 1).isActive = true
-        captionLabel.anchor(top: stackView?.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        addSubview(numofLikesLabel)
+        addSubview(numofCommentsLabel)
+        
+        likesCommentsStackView = UIStackView(arrangedSubviews: [numofLikesLabel,numofCommentsLabel])
+        stackView?.axis = .horizontal
+        stackView?.distribution = .fillEqually
+
+        addSubview(likesCommentsStackView!)
+        
+//        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: ImageView.topAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 40, height: 40)
+//        optionsButton.anchor(top: topAnchor, left: usernameLabel.rightAnchor, bottom: ImageView.topAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: -8, paddingRight: 8, width: 44, height: 0)
+//        usernameLabel.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: ImageView.topAnchor, right: optionsButton.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 0, height: 0)
+//        ImageView.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+//        ImageView.heightAnchor.constraint(equalTo: ImageView.widthAnchor, multiplier: 1).isActive = true
+//        
+//        numofLikesLabel.anchor(top: stackView?.bottomAnchor, left: leftAnchor, bottom: numofCommentsLabel.topAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+//        numofCommentsLabel.anchor(top: numofLikesLabel.bottomAnchor, left: leftAnchor, bottom: captionLabel.topAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+//        
+//        captionLabel.anchor(top: numofCommentsLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+//        setupActionButtons()
+        
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: captionLabel.topAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 40, height: 40)
+
+        optionsButton.anchor(top: topAnchor, left: usernameLabel.rightAnchor, bottom: captionLabel.topAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: -8, paddingRight: 8, width: 44, height: 0)
+        
+        usernameLabel.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: captionLabel.topAnchor, right: optionsButton.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 0, width: 0, height: 0)
+        captionLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: ImageView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: -8, paddingRight: 8, width: 0, height: 0)
+        ImageView.anchor(top: captionLabel.bottomAnchor, left: leftAnchor, bottom: likesCommentsStackView?.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: -8, paddingRight: 8, width: 0, height: 0)
+        
+        
+        
+        
+        likesCommentsStackView?.anchor(top: ImageView.bottomAnchor, left: leftAnchor, bottom: stackView?.topAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 250, height: 20)
         setupActionButtons()
+
     }
     
     var stackView: UIStackView?
@@ -134,7 +191,7 @@ class HomeFeedCell: UICollectionViewCell {
         stackView?.distribution = .fillEqually
         
         addSubview(stackView!)
-        stackView?.anchor(top: ImageView.bottomAnchor, left: leftAnchor, bottom: captionLabel.topAnchor, right: nil, paddingTop: 8, paddingLeft: 0, paddingBottom: -8, paddingRight: 0, width: 80, height: 40)
+        stackView?.anchor(top: likesCommentsStackView?.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 80, height: 40)
     }
     
     required init?(coder aDecoder: NSCoder) {

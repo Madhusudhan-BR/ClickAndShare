@@ -23,6 +23,7 @@ class CustomImageView: UIImageView {
             return 
         }
         
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return
             }

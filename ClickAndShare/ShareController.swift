@@ -21,8 +21,8 @@ class ShareController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
-        navigationController?.navigationBar.tintColor = UIColor.black
+        view.backgroundColor = UIColor.white
+        //navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(handleShare))
         
         setupContainerView()
@@ -31,12 +31,19 @@ class ShareController : UIViewController {
     let imageView : UIImageView = {
          let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 6
         iv.clipsToBounds = true
         return iv
     }()
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(false)
+    }
+    
     let captionTextView : UITextField = {
         let textfield  = UITextField()
+        textfield.layer.cornerRadius = 6
+        textfield.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
         textfield.placeholder = "Enter a caption here"
         return textfield
     }()
@@ -48,10 +55,10 @@ class ShareController : UIViewController {
         containerView.anchor(top: topLayoutGuide.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: view.frame.width + 100)
         
         containerView.addSubview(imageView)
-        imageView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: view.frame.width)
+        imageView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: view.frame.width/2, height: view.frame.width/2)
         
         containerView.addSubview(captionTextView)
-        captionTextView.anchor(top: imageView.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: -8, paddingRight: 8, width: 0, height: 0)
+        captionTextView.anchor(top: imageView.bottomAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 100)
         
         
     }
@@ -61,7 +68,10 @@ class ShareController : UIViewController {
     }
     
     func handleShare() {
-        
+        guard  let caption = captionTextView.text, caption != "" else {
+            saveFeedack()
+            return
+        }
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         guard let imageToUpload = selectedImage else { return }
@@ -90,6 +100,7 @@ class ShareController : UIViewController {
     func uploadToDatabase(imageUrl: String){
         
         guard  let caption = captionTextView.text, caption != "" else {
+            saveFeedack()
             return
         }
         
@@ -115,6 +126,33 @@ class ShareController : UIViewController {
             print("Post data has been uploaded to firebase")
             
         }
+        
+    }
+    
+    func saveFeedack() {
+        let label = UILabel()
+        label.text = "Please enter caption to share the image!"
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.numberOfLines = 0 
+        label.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        view.addSubview(label)
+        label.frame = CGRect(x: 0, y: 0, width: 200, height: 80)
+        label.center = view.center
+        
+        label.layer.transform = CATransform3DMakeScale(0, 0, 0)
+        label.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            label.layer.transform = CATransform3DMakeScale(1, 1, 1)
+            label.alpha = 1
+        }, completion: { (completed) in
+            UIView.animate(withDuration: 0.5, delay: 0.75, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+                label.alpha = 1
+            }, completion: { (_) in
+                label.removeFromSuperview()
+            })
+        })
         
     }
     

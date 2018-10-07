@@ -13,6 +13,8 @@ import FirebaseDatabase
 protocol  UserProfileDelegate {
     func didTapGrid()
     func didTapList()
+    func didTapBookmark()
+    func didTapEditProfileButton()
 }
 
 class UserProfileHeader: UICollectionViewCell {
@@ -24,6 +26,7 @@ class UserProfileHeader: UICollectionViewCell {
                 return
             }
             setupEditProfileFolloeButton()
+            
             self.profileImageView.loadImage(urlString: url)
             usernameLabel.text = user?.username
             let attributedText = NSMutableAttributedString(string: "\(user?.posts == nil ? 0 : user!.posts!)\n", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)])
@@ -40,7 +43,7 @@ class UserProfileHeader: UICollectionViewCell {
             
             followersLabel.attributedText = followersattributedText
             
-            
+            followersLabel.isHidden = true
         }
     }
     
@@ -55,11 +58,13 @@ class UserProfileHeader: UICollectionViewCell {
             if let isFollowing = snapshot.value as? String, isFollowing == "1" {
                 self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
                 self.editProfileFollowButton.backgroundColor = UIColor.white
+                self.editProfileFollowButton.layer.borderColor = UIColor.black.cgColor
                 self.editProfileFollowButton.setTitleColor(UIColor.black, for: .normal)
 
             } else {
                 self.editProfileFollowButton.setTitle("Follow", for: .normal)
-                self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.backgroundColor = blueColor    //UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.layer.borderColor = blueColor.cgColor
                 self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
 
             }
@@ -120,7 +125,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
-        iv.layer.cornerRadius = 40
+        iv.layer.cornerRadius = 4
         iv.layer.masksToBounds = true 
         return iv
     }()
@@ -153,18 +158,25 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     
-    let bookmarkButton : UIButton = {
+    lazy var bookmarkButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor(white: 0, alpha: 0.1)
+        button.addTarget(self, action: #selector(handleBookmark), for: .touchUpInside)
         button.setImage(#imageLiteral(resourceName: "ribbon"), for: .normal)
         return button
     }()
+    
+    func handleBookmark() {
+        delegate?.didTapBookmark()
+    }
+    
+    
     
     lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         //button.setTitle("Edit button", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.borderColor = UIColor.lightGray.cgColor
+       button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 3
         button.addTarget(self, action:#selector(handleEditProfileFollowButton), for: .touchUpInside)
@@ -174,9 +186,10 @@ class UserProfileHeader: UICollectionViewCell {
     func handleEditProfileFollowButton() {
         
         guard let currentLoggedinUserId = Auth.auth().currentUser?.uid else { return }
-
+        
         
         if editProfileFollowButton.titleLabel?.text == "Edit Profile" {
+            delegate?.didTapEditProfileButton()
             
         } else if editProfileFollowButton.titleLabel?.text == "Follow" {
             
@@ -189,6 +202,7 @@ class UserProfileHeader: UICollectionViewCell {
                 print("successfully followed user", self.user?.username ?? "")
                 self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
                 self.editProfileFollowButton.backgroundColor = UIColor.white
+                self.editProfileFollowButton.layer.borderColor = UIColor.black.cgColor
                 self.editProfileFollowButton.setTitleColor(UIColor.black, for: .normal)
             })
             
@@ -200,7 +214,8 @@ class UserProfileHeader: UICollectionViewCell {
                 }
                 print("unfollowed User", self.user?.username ?? "")
                 self.editProfileFollowButton.setTitle("Follow", for: .normal)
-                self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.backgroundColor = blueColor//UIColor.rgb(red: 17, green: 154, blue: 237)
+                self.editProfileFollowButton.layer.borderColor = blueColor.cgColor
                 self.editProfileFollowButton.setTitleColor(UIColor.white, for: .normal)
             })
             
@@ -222,6 +237,7 @@ class UserProfileHeader: UICollectionViewCell {
         addSubview(editProfileFollowButton)
         editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 34)
         
+        followersLabel.isHidden = true
         
     }
     
@@ -236,6 +252,8 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         stackView.anchor(top: topAnchor, left: profileImageView.rightAnchor , bottom: nil, right: self.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
+        
+        
     }
     
     fileprivate func setupButtonToolbar() {
@@ -245,7 +263,7 @@ class UserProfileHeader: UICollectionViewCell {
         let bottomDividerView = UIView()
         bottomDividerView.backgroundColor = UIColor.lightGray
         
-        let stackView = UIStackView(arrangedSubviews: [gridButton, listButton, bookmarkButton])
+        let stackView = UIStackView(arrangedSubviews: [gridButton, listButton])
         addSubview(stackView)
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -257,7 +275,9 @@ class UserProfileHeader: UICollectionViewCell {
 
         addSubview(bottomDividerView)
         bottomDividerView.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-
+        
+        stackView.isHidden = true
+        topDividerView.isHidden = true 
     }
     
   

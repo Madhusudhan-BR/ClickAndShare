@@ -22,7 +22,7 @@ class CommentCell: UICollectionViewCell {
     
     let profileImageView : CustomImageView = {
         let iv = CustomImageView()
-        iv.layer.cornerRadius = 20
+        iv.layer.cornerRadius = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = UIColor.red

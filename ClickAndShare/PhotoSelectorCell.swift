@@ -14,6 +14,7 @@ class PhotoSelectorCell : UICollectionViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        //iv.layer.cornerRadius = 20
         return iv
     }()
     
